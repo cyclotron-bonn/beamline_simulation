@@ -1,22 +1,26 @@
-def calcKb(B, x, E):
+def calcK(B, x, E):
     B = float(B)
     x = float(x)
     E = float(E)
     B = gammaT * B
-    beta = np.sqrt(1.0 - 1.0 / ( E / E0 +1)**2)
-    return 0.2998 * (B/x) / (beta * E) # maybe - for protons instead of electrons
+    gamma = E / E0 +1
+    beta = np.sqrt(1.0 - 1.0 / (gamma)**2)
+    print(beta*gamma)
+    p = gamma * m0 * C * beta
+    return -Q *  (B/x) / (p) # maybe - for protons instead of electrons
 
 
 import sys
 import numpy as np
 
-m = 1.672621e-27 # kg
+m0 = 1.672621e-27 # kg
 C = 299792458 # m/s
 jMeV = 1.60218e-13 # proportion joules to mev
 gammaT = 1e-1 # kGs to tesla
 E0 = 0.938271998 # MeV
+Q = 1.602176634e-19
 
-k = calcKb(*sys.argv[1:3], sys.argv[4])
+k = calcK(*sys.argv[1:3], sys.argv[4])
 print(k)
 
 with open(sys.argv[6], "r") as f:

@@ -1,7 +1,7 @@
 ! use protons instead of electrons
 &change_particle  
     name = "proton"  
-    mass_ratio = 1 ! specify custom masses (helpfull for deuterium, alpha?)
+    mass_ratio = 0 ! specify custom masses (helpfull for deuterium, alpha?)
     charge_ratio = 1  ! will stay probably
 &end 
 
@@ -27,23 +27,36 @@
     acceptance="%s.acc" !not lost particles
     losses="%s.lost"! lost particles
 
-	p_central_mev= 2.33333e-8 ! 7MeV / 3e8
+    p_central = 0.25489146171972915 ! 30 MEV
+	! p_central_mev= 2.33333e-8 ! 7MeV / 3e8
 &end
 
 &run_control 
     n_steps=1 !how many times is simulated
 &end
 
+&twiss_output
+    filename= "%s.twi",
+    final_values_only=0,
+    statistics=1,
+    radiation_integrals=0,
+    concat_order = 3,
+    local_dispersion = 0,
+    matched = 0
+    beta_x = 3.5072815534,  alpha_x = -15.347 , eta_x = 5.15e-6
+    beta_y = 5.90909,       alpha_y = -212.355, eta_y = 7.15e-6
+&end
+
 ! see page 38 and 14
 &bunched_beam 
 	bunch = "%s.bun" ! file where phase space coords of bunches are written
     n_particles_per_bunch = 10000
-    emit_x = 5.15e-5, !rms emitance of x plane
-    emit_y = 7.15e-5,
+    emit_x = 5.15e-6, !rms emitance of x plane
+    emit_y = 7.15e-6,
     sigma_dp = 4e-3, ! energy spread have to convert!fractional momentum spread
     sigma_s = 0.00001
-    beta_x = 0.000602
-    beta_y = 0.001112
+    beta_x =3.5072815534
+    beta_y =5.90909
     enforce_rms_values[0] = 3*1,
 &end
 

@@ -20,7 +20,7 @@ b3=-4.023
 # b3=0
 
 
-E=0.007
+E=0.030
 
 python3 ./insertk.py $ba $xa 0.5 $E M1 lattice_hinterberger_templ.lte
 python3 ./insertk.py $bb $xb 0.5 $E M2 lattice_hinterberger_insert.lte

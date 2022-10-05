@@ -1,7 +1,7 @@
 ! beam ridgitiy = 
 
 xQ1: drift, l=1 ! first drift from x to Q1 (named as in ISKP Bericht 1970/1)
-QA: quadrupole, l=0.22525, k1=  M1 !k1 = feld and der Polspitze / halbe aperatur )( p / q )
+QA: quadrupole, l=0.22525, k1= M1 !k1 = feld and der Polspitze / halbe aperatur )( p / q )
 QAQB: drift, l=0.15
 QB: quaddrupole, l=0.22525, k1= M2
 QBA0: drift, l=0.28
