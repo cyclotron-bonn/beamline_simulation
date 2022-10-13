@@ -1,38 +1,33 @@
 ! beam ridgitiy = 
 
 xQ1: drift, l=1 ! first drift from x to Q1 (named as in ISKP Bericht 1970/1)
-QA: quadrupole, l=0.22525, k1= 13.136065801163175 !k1 = feld and der Polspitze / halbe aperatur )( p / q )
+QA: quad, l=0.22525, k1= 13.136065801163175 
 QAQB: drift, l=0.15
-QB: quaddrupole, l=0.22525, k1= -16.516889992619006
+QB: quad, l=0.22525, k1= -16.516889992619006
 QBA0: drift, l=0.28
 A0: sbend, l=0.262, angle=0.2096, e1 = 0.0, e2 = 0.0, h1=7.6, h2=7.6 ! e kantenwinkel, h kantenkrümmung
 A0S1: drift, l=0.2
 
 S1Q1: drif, l=0.26
-Q1: quadrupole, l=0.22525, k1=  -21.85372700556323! for C weg
+Q1: quad, l=0.22525, k1=  27.304747508086727! for C weg
 Q1Q2: drift, l=0.6845
-Q2: quadrupole, l=0.24025, k1 = -1.0028289084788213 ! for C weg
+Q2: quad, l=0.24025, k1 = -1.35475333909406 ! for C weg
 Q2A1: drift, l=0.45
 A1: sbend, l=1.9634, angle= 1.57079, e1=0.8726646259972, e2 = 0.02565634000432, h1 = 0.585, h2 = 0
 
-! end C and S weg together
-
-! S weg look at: page 42 and 30
-A1SMC_S: drift, l=2.3
-
 ! C weg look at: page 62 and 30
 A1Q3: drift, l=1.66
-Q3: quadrupole, l=0.24025, k1= -1.9402559316220676
+Q3: quad, l=0.24025, k1= 12.529132605000926
 !mittelschlitz
 Q3SMC_C: drift, l=0.45
 SMCQ3C_C: drift, l=0.45
-Q3C: quadrupole, l=0.22525, k1= -1.9402559316220676
+Q3C: quad, l=0.24025, k1= 12.529132605000926
 Q3CA2: drift, l=1.66
 A2: sbend, l=1.9634, angle= 1.57079, e2=0.8726646259972, e1 = 0.02565634000432, h2 = 0.585, h1 = 0
 A2Q2_C: drift, l=0.45
-Q2C: quadrupole, l=0.24025, k1 = -1.0028289084788213
+Q2C: quad, l=0.24025, k1 = -1.35475333909406
 Q2CQ1C: drift, l=0.6845
-Q1C: quadrupole, l=0.22525, k1= -21.85372700556323
+Q1C: quad, l=0.22525, k1= 27.304747508086727
 Q1SAC: drif, l=0.26
 
 SMCQ3_C: drift, l=0.45
@@ -41,7 +36,6 @@ SMCQ3_C: drift, l=0.45
 
 XS1: LINE=(xQ1, QA, QAQB, QB, QBA0, A0, A0S1)
 S1A1: LINE=(S1Q1,Q1,Q1Q2,Q2,Q2A1,A1)
-
 A1SAC: LINE=(A1Q3,Q3,Q3SMC_C,SMCQ3C_C,Q3C,Q3CA2,A2,A2Q2_C,Q2C,Q2CQ1C,Q1C,Q1SAC)
 
 XSMC: LINE=(XS1, S1A1)

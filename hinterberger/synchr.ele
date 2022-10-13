@@ -32,7 +32,7 @@
 &end
 
 &run_control 
-    n_steps=6 !how many times is simulated
+    n_steps=1 !how many times is simulated
 &end
 
 &twiss_output
@@ -58,4 +58,6 @@
     enforce_rms_values[0] = 3*1,
 &end
 
-&track &end
+&track
+    soft_failure = 1
+&end
