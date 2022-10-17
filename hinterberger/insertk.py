@@ -6,9 +6,10 @@ def calcK(B, x, E):
     gamma = E / E0 +1
     beta = np.sqrt(1.0 - 1.0 / (gamma)**2)
     #print(beta*gamma)
+    #print(beta)
     p = gamma * m0 * C * beta
     #print(p)
-    return -Q *  (B/x) / (p) # maybe - for protons instead of electrons
+    return Q *  (B/x) / (p) # maybe - for protons instead of electrons
 
 
 import sys
