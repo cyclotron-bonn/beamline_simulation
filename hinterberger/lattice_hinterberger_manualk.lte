@@ -1,33 +1,33 @@
 ! beam ridgitiy = 
 
 xQ1: drift, l=1 ! first drift from x to Q1 (named as in ISKP Bericht 1970/1)
-QA: quad, l=0.22525, k1= -13.136065801163175 
+QA: quad, l=0.22525, k1= 3.72090605246444
 QAQB: drift, l=0.15
-QB: quad, l=0.22525, k1= 16.516889992619006
+QB: quad, l=0.22525, k1= -3.72090605246444
 QBA0: drift, l=0.28
 A0: sbend, l=0.262, angle=0.2096, e1 = 0.0, e2 = 0.0, h1=7.6, h2=7.6 ! e kantenwinkel, h kantenkrümmung
 A0S1: drift, l=0.2
 
 S1Q1: drif, l=0.26
-Q1: quad, l=0.22525, k1=  -14.893498640774578! for C weg
+Q1: quad, l=0.22525, k1=  2.3810934002020523! for C weg
 Q1Q2: drift, l=0.6845
-Q2: quad, l=0.24025, k1 = -2.877682954765314 ! for C weg
+Q2: quad, l=0.24025, k1 = -2.3810934002020523 ! for C weg
 Q2A1: drift, l=0.45
 A1: sbend, l=1.9634, angle= 1.57079, e1=0.8726646259972, e2 = 0.02565634000432, h1 = 0.585, h2 = 0
 
 ! C weg look at: page 62 and 30
 A1Q3: drift, l=1.66
-Q3: quad, l=0.24025, k1= -4.721393246130104
+Q3: quad, l=0.24025, k1= 0.01
 !mittelschlitz
 Q3SMC_C: drift, l=0.45
 SMCQ3C_C: drift, l=0.45
-Q3C: quad, l=0.24025, k1= -4.721393246130104
+Q3C: quad, l=0.24025, k1= 0.1
 Q3CA2: drift, l=1.66
 A2: sbend, l=1.9634, angle= 1.57079, e2=0.8726646259972, e1 = 0.02565634000432, h2 = 0.585, h1 = 0
 A2Q2_C: drift, l=0.45
-Q2C: quad, l=0.24025, k1 = -2.877682954765314
+Q2C: quad, l=0.24025, k1 = -3.7466129127713192
 Q2CQ1C: drift, l=0.6845
-Q1C: quad, l=0.22525, k1= -14.893498640774578
+Q1C: quad, l=0.22525, k1= 3.7466129127713192
 Q1SAC: drif, l=0.26
 
 SMCQ3_C: drift, l=0.45
