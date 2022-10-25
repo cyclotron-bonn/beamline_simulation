@@ -75,7 +75,7 @@ d = m2 - m1
 l = 0.22525 #effective field length
 
 fi = np.sqrt(d*f)
-ki = fi / l
+ki = 1/(fi * l)
 print("ki1",ki)
 
 k1 = 2.602
@@ -100,7 +100,7 @@ d = m2 - m1
 l = 0.24025 #effective field length
 
 fi = np.sqrt(d*f)
-ki = fi / l
+ki = 1/(fi * l)
 print("ki2",ki)
 
 
@@ -126,7 +126,7 @@ d = m2 - m1
 l = 0.24025 #effective field length
 
 fi = np.sqrt(d*f)
-ki = fi / l
+ki = 1/(fi * l)
 print("ki3",ki)
 
 k1 = 13.27
@@ -145,5 +145,5 @@ d = m2 - m1
 l = 0.23225 #effective field length
 
 fi = np.sqrt(d*f)
-ki = fi / l
+ki = 1/(fi * l)
 print("ki3",ki)
