@@ -1,7 +1,4 @@
 # script to calculate parameter of simulation
-from curses import KEY_A1
-from hashlib import sha3_384
-from re import T
 import numpy as np
 
 E = 30 # MeV
@@ -147,3 +144,29 @@ l = 0.23225 #effective field length
 fi = np.sqrt(d*f)
 ki = 1/(fi * l)
 print("ki3",ki)
+
+# calculate magnetic field for quadrupole magnets
+
+def calcB(k, x, E):
+    gammaT = 1e-1 # kGs to tesla
+    m0 = 1.672621e-27 # kg
+    Q = 1.602176634e-19
+    #B = float(B)
+    k = float(k)
+    x = float(x)
+    E = float(E)
+    #B = gammaT * B
+    gamma = E / E0 +1
+    beta = np.sqrt(1.0 - 1.0 / (gamma)**2)
+    #print(beta*gamma)
+    #print(beta)
+    p = gamma * m0 * C * beta
+    #print(p)
+    return k * x * p / (Q) # maybe - for protons instead of electrons
+
+lengths = [0.02525,0.02525,0.02525,0.04025,0.04025,0.04025,0.04025,0.02525]
+E=30
+k = [-5.296899047060016, 5.296899047060016, -1.880014945516087, -1.880014945516087, -1.7871376976605226, -1.0871376976605226, -1.948228303397646, -0.948228303397646]
+
+for i in range(8):
+    print(i, calcB(k[i], lengths[i], E) * 10)
