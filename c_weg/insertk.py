@@ -19,7 +19,7 @@ m0 = 1.672621e-27 # kg
 C = 299792458 # m/s
 jMeV = 1.60218e-13 # proportion joules to mev
 gammaT = 1e-1 # kGs to tesla
-E0 = 0.938271998 # MeV
+E0 = 0.938271998 # GeV
 Q = 1.602176634e-19
 
 k = calcK(*sys.argv[1:3], sys.argv[4])

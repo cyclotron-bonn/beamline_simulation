@@ -14,8 +14,8 @@
 
 
 &run_setup
-	lattice="lattice_c_weg.lte"!"lattice_hinterberger.lte"
-	use_beamline="XSAC" !change to use different "weg"
+	lattice="lattice_c_weg_manualK.lte"!"lattice_hinterberger.lte"
+	use_beamline="XQ6C" !change to use different "weg"
 
     rootname = "simout/synchr"
 	default_order = 3
