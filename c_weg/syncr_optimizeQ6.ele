@@ -1,0 +1,143 @@
+! use protons instead of electrons
+&change_particle  
+    name = "proton"  
+    !mass_ratio = 0 ! specify custom masses (helpfull for deuterium, alpha?)
+    !charge_ratio = 1  ! will stay probably
+&end 
+
+! &aperture_data
+!     input = "apertur.in"
+!     periodic = 1;
+!     persistent = 0;
+!     disable = 0;
+! &end
+
+
+&run_setup
+	lattice="lattice_c_weg_optimize.lte"!"lattice_hinterberger.lte"
+	use_beamline="XQ6" !change to use different "weg"
+
+    rootname = "simout/synchrOPQ6"
+	default_order = 3
+	sigma="%s.s" !sigma output
+	final="%s.fin" !final beam parameter
+	output="%s.out" !phase space coords
+	magnets="%s.mag" !magnet representation
+	centroid="%s.cen" !beam centroids (center of mass?)
+    acceptance="%s.acc" !not lost particles
+    losses="%s.lost"! lost particles
+
+    p_central =  0.1733918406003467 ! 14MeV
+&end
+
+&run_control 
+    n_steps=1 !how many times is simulated
+&end
+
+&twiss_output
+    filename= "%s.twi",
+    final_values_only=0,
+    statistics=1,
+    radiation_integrals=0,
+    concat_order = 3,
+    local_dispersion = 0,
+    matched = 0
+    beta_x = 3.5072815534,  alpha_x = -0.5786451401438165
+    beta_y = 5.90909,       alpha_y = -4.150194598599981
+&end    
+
+
+&optimization_setup
+    mode = "minimize", method = "simplex",
+    target = 1e-3,
+    tolerance = 1e-3, n_passes = 5, n_evaluations = 200, log_file = "/dev/tty",
+    n_restarts = 3
+&end
+
+
+
+&optimization_term
+    term="betax betay + ave.betax ave.betay + +"
+&end
+
+&optimization_variable
+    name = Q1, item=k1, lower_limit= -10, upper_limit = 10
+&end
+
+&optimization_variable
+    name = Q2, item=k1, lower_limit= -10, upper_limit = 10
+&end
+
+&optimization_variable
+    name = Q3, item=k1, lower_limit= -10, upper_limit = 10
+&end
+
+&optimization_variable
+    name = Q4, item=k1, lower_limit= -10, upper_limit = 10
+&end
+
+&optimization_variable
+    name = Q5, item=k1, lower_limit= -10, upper_limit = 5
+&end
+
+&optimization_variable
+    name = Q6, item=k1, lower_limit= -5, upper_limit = 10
+&end
+
+&bunched_beam 
+	bunch = "%s.bun" ! file where phase space coords of bunches are written
+    n_particles_per_bunch = 10000
+    sigma_dp = 4e-3, ! energy spread have to convert!fractional momentum spread
+    sigma_s = 0.7108510458495747
+    beta_x = 3.5072815534,  alpha_x = -0.5786451401438165 
+    beta_y = 5.90909,       alpha_y = -4.150194598599981
+    emit_x = 5.1499611649021206e-06
+    emit_y = 7.156290938747533e-06
+    enforce_rms_values[0] = 3*1,
+&end
+
+&optimize summarize_setup=1 &end
+
+
+
+&save_lattice filename = %s.new &end
+
+
+&run_setup
+	lattice="simout/synchrOPQ6.new"!"lattice_hinterberger.lte"
+	use_beamline="XQ6" !change to use different "weg"
+
+    rootname = "simout/synchrOPQ6"
+	default_order = 3
+	sigma="%s.s" !sigma output
+	final="%s.fin" !final beam parameter
+	output="%s.out" !phase space coords
+	magnets="%s.mag" !magnet representation
+	centroid="%s.cen" !beam centroids (center of mass?)
+    acceptance="%s.acc" !not lost particles
+    losses="%s.lost"! lost particles
+
+    p_central =  0.1733918406003467 ! 14MeV
+&end
+
+&run_control 
+    n_steps=1 !how many times is simulated
+&end
+
+&twiss_output
+    filename= "%s.twi",
+    final_values_only=0,
+    statistics=1,
+    radiation_integrals=0,
+    concat_order = 3,
+    local_dispersion = 0,
+    matched = 0
+    beta_x = 3.5072815534,  alpha_x = -0.5786451401438165
+    beta_y = 5.90909,       alpha_y = -4.150194598599981
+&end  
+
+
+
+&track
+    soft_failure = 1
+&end

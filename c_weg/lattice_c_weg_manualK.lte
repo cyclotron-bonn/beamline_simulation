@@ -34,9 +34,9 @@ Q2C: quad, l=0.22525, k1 = -0.827220286720278
 Q2CQ3C: drift, l=0.77
 
 !shaky
-Q3C: quad, l = 0.22525, k1 = 3.5511877218576313 ! l same as Q1 bc of symmetry
+Q3C: quad, l = 0.22525, k1 =  4.360904738218950! l same as Q1 bc of symmetry
 Q3CQ4C: drift, l=0.18
-Q4C: quad, l = 0.22525, k1 = -3.7511877218576313 ! l same as Q2 bc of symmetry
+Q4C: quad, l = 0.22525, k1 = -1.032438743189447e+01 ! l same as Q2 bc of symmetry
 Q4CQ5C: drift, l = 5.77 !0.2 + 0.2 + 0.2 + 5.17 
 Q5C: quad, l= 0.24025, k1 = 0 !assume Q5 = Q6 = Q5C = Q6C
 Q5CQ6C: drift, l = 0.2
@@ -52,6 +52,10 @@ A2Q3C: LINE=(A2,A2Q1C,Q1C,Q1CQ2C,Q2C,Q2CQ3C)
 
 XQ3C: LINE=(XA2, A2Q3C)
 
-Q3CQ6C: LINE=(Q3C,Q3CQ4C,Q4C,Q4CQ5C,Q5C,Q5CQ6C,Q6C)
+Q3CQ5C: LINE=(Q3C,Q3CQ4C,Q4C,Q4CQ5C)
 
-XQ6C: LINE=(XQ3C,Q3CQ6C)
+XQ5C: LINE=(XQ3C, Q3CQ5C)
+
+Q5CEND: LINE=(Q5C,Q5CQ6C,Q6C)
+
+XEND: LINE=(XQ5C,Q5CEND)
