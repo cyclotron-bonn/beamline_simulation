@@ -2,8 +2,8 @@
 
 cd simout
 
-#sddsplot -columnNames=s,Sy synchr.s
-#sddsplot -columnNames=s,Sx synchr.s
+sddsplot -columnNames=s,Sy synchr.s
+sddsplot -columnNames=s,Sx synchr.s
  
 #sddsplot -columnNames=s,Cx synchr.cen
 #sddsplot -columnNames=s,Cy synchr.cen

@@ -65,7 +65,7 @@
 &end
 
 &optimization_variable
-    name = Q6C, item=k1, lower_limit= -10, upper_limit = 10
+    name = Q6C, item=k1, lower_limit= -10, upper_limit = 100
 &end
 
 &bunched_beam 
