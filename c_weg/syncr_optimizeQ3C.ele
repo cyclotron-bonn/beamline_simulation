@@ -61,6 +61,15 @@
 &end
 
 &optimization_variable
+    name = Q1C, item=k1, lower_limit= -20, upper_limit = 20, step_size = 0.0001
+&end
+
+! turned off because of logs
+! &optimization_variable
+!     name = Q2C, item=k1, lower_limit= -20, upper_limit = 20, step_size = 0.0001
+! &end
+
+&optimization_variable
     name = Q3C, item=k1, lower_limit= -20, upper_limit = 20, step_size = 0.0001
 &end
 
