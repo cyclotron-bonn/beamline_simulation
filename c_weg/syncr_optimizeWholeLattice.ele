@@ -70,18 +70,18 @@
 &end
 
 ! optimization turned off because of log books
-&optimization_variable
-    name = Q3, item=k1, lower_limit= -10, upper_limit = 10
-&end
+! &optimization_variable
+!     name = Q3, item=k1, lower_limit= -10, upper_limit = 10
+! &end
 
 &optimization_variable
     name = Q4, item=k1, lower_limit= -10, upper_limit = 10
 &end
 
 ! optimization turned off because of log books
-&optimization_variable
-    name = Q5, item=k1, lower_limit= -10, upper_limit = 5
-&end
+! &optimization_variable
+!     name = Q5, item=k1, lower_limit= -10, upper_limit = 5
+! &end
 
 &optimization_variable
     name = Q6, item=k1, lower_limit= -5, upper_limit = 20
@@ -101,9 +101,9 @@
 &end
 
 ! turned off because of logs
-&optimization_variable
-    name = Q2C, item=k1, lower_limit= -20, upper_limit = 20, step_size = 0.0001
-&end
+! &optimization_variable
+!     name = Q2C, item=k1, lower_limit= -20, upper_limit = 20, step_size = 0.0001
+! &end
 
 &optimization_variable
     name = Q3C, item=k1, lower_limit= -20, upper_limit = 20, step_size = 0.0001
