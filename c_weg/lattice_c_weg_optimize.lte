@@ -1,46 +1,46 @@
 !geometry from tikz latex PDF
 
 xQ1: drift, l=1 ! first drift from x to Q1 (named as in ISKP Bericht 1970/1)
-Q1: quad, l=0.22525, k1= -8.032632170236480 ! lengths are different hinterberger and latex, stick wth hinterberger
+Q1: quad, l=0.22525, k1= -8.111316713341184e+00 ! lengths are different hinterberger and latex, stick wth hinterberger
 Q1Q2: drift, l=0.15
-Q2: quad, l=0.22525, k1= 7.906463384285791
+Q2: quad, l=0.22525, k1= 7.441845116217431e+00
 Q2A0: drift, l=0.28
 A0: sbend, l=0.262, angle=0.2096, e1 = 0.0, e2 = 0.0, h1=7.6, h2=7.6 ! e kantenwinkel, h kantenkrümmung
 A0Q3: drif, l=0.36 ! latex length
-Q3: quad, l=0.22525, k1=  -5.372073394076827
+Q3: quad, l=0.22525, k1 = -2.214380450856861e+00 !k1=  -5.372073394076827
 Q3Q4: drift, l=0.6845
-Q4: quad, l=0.24025, k1 = -1.988171844881767
+Q4: quad, l=0.24025, k1 = -4.938561622964420e-01
 Q4A1: drift, l=0.35
 A1: sbend, l=1.9634, angle= 1.57079, e1=0.8726646259972, e2 = 0.02565634000432, h1 = 0.585, h2 = 0
 A1Q5: drift, l=1.66
-Q5: quad, l=0.24025, k1= -3.545196437663929
+Q5: quad, l=0.24025, k1 = -7.470615093911566e-01 !k1= -3.545196437663929
 Q5SMC: drift, l=0.45
 SMCQ6: drift, l=0.45
-Q6: quad, l=0.24025, k1= 4.999950362636415
+Q6: quad, l=0.24025, k1= 9.999915601468636e+00
 
 !shaky
 Q6Q7: drift, l = 0.247 ! geom value tex = 0.23
-Q7: quad, l = 0.201, k1 = 2.802310507259319 ! geom value 
+Q7: quad, l = 0.201, k1 = -1.511182415981476e+01 ! geom value 
 Q7Q8: drift, l = 0.248 ! geom value tex = 0.22
-Q8: quad, l = 0.201, k1 = -9.803558799383001 !geom value
+Q8: quad, l = 0.201, k1 = 1.864675663005335e+01 !geom value
 Q8A2: drift, l = 0.763 ! 1.66 - Q6Q7 - Q7 - Q7Q8 - Q8
 
 
 A2: sbend, l=1.9634, angle= 1.57079, e2=0.8726646259972, e1 = 0.02565634000432, h2 = 0.585, h1 = 0
 A2Q1C: drift, l = 0.45
-Q1C: quad, l=0.24025, k1 = 0.827220286720278
+Q1C: quad, l=0.24025, k1 = 1.507337974899172e+00
 Q1CQ2C: drift, l=0.6845
-Q2C: quad, l=0.22525, k1 = -0.827220286720278
+Q2C: quad, l=0.22525, k1 = 1.444778636838591e+00 !k1 = -0.827220286720278
 Q2CQ3C: drift, l=0.77
 
 !shaky
-Q3C: quad, l = 0.22525, k1 =  4.743811311564937! l same as Q1 bc of symmetry
+Q3C: quad, l = 0.22525, k1 =  3.032009511989033e+00! l same as Q1 bc of symmetry
 Q3CQ4C: drift, l=0.18
-Q4C: quad, l = 0.22525, k1 = -4.326949519563954 ! l same as Q2 bc of symmetry
+Q4C: quad, l = 0.22525, k1 = -4.071592647749759e+00 ! l same as Q2 bc of symmetry
 Q4CQ5C: drift, l = 5.77 !0.2 + 0.2 + 0.2 + 5.17 
-Q5C: quad, l= 0.24025, k1 = -7.348729068052873! 7.861921031183253 !assume Q5 = Q6 = Q5C = Q6C
+Q5C: quad, l= 0.24025, k1 = -9.999994516123344e+00! 7.861921031183253 !assume Q5 = Q6 = Q5C = Q6C
 Q5CQ6C: drift, l = 0.2
-Q6C: quad, l= 0.24025, k1 = 4.750701429497714e+01!9.999742064180383 !assume Q5 = Q6 = Q5C = Q6C
+Q6C: quad, l= 0.24025, k1 = 5.310866645179173e+01!9.999742064180383 !assume Q5 = Q6 = Q5C = Q6C
 
 
 XQ6: LINE=(xQ1,Q1,Q1Q2,Q2,Q2A0,A0,A0Q3,Q3,Q3Q4,Q4,Q4A1,A1,A1Q5,Q5,Q5SMC,SMCQ6,Q6)
