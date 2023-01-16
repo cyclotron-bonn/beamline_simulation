@@ -31,15 +31,15 @@ A2Q1C: drift, l = 0.45
 Q1C: quad, l=0.24025, k1 = 1.507337974899172e+00
 Q1CQ2C: drift, l=0.6845
 Q2C: quad, l=0.22525, k1 = 0
-Q2CQ3C: drift, l=0.77
+Q2CQ3C: drift, l= 0.74775 !l=0.77
 
 !shaky
 Q3C: quad, l = 0.22525, k1 =  3.032009511989033e+00! l same as Q1 bc of symmetry
-Q3CQ4C: drift, l=0.18
+Q3CQ4C: drift, l= 0.14575 !l=0.18
 Q4C: quad, l = 0.22525, k1 = -4.071592647749759e+00 ! l same as Q2 bc of symmetry
-Q4CQ5C: drift, l = 5.77 !0.2 + 0.2 + 0.2 + 5.17 
+Q4CQ5C: drift, l= 6.14175 !l = 5.77 !0.2 + 0.2 + 0.2 + 5.17 
 Q5C: quad, l= 0.24025, k1 = -9.999994516123344e+00! 7.861921031183253 !assume Q5 = Q6 = Q5C = Q6C
-Q5CQ6C: drift, l = 0.2
+Q5CQ6C: drift, l = 0.21075 !l = 0.2
 Q6C: quad, l= 0.24025, k1 = 5.310866645179173e+00!9.999742064180383 !assume Q5 = Q6 = Q5C = Q6C
 
 
