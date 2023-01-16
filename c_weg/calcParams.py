@@ -206,3 +206,34 @@ l = 0.24025 #effective field length
 fi = np.sqrt(d*f)
 ki = 1/(fi * l)
 print("ki7",ki)
+
+# lengths of drifts for c_weg of measurements
+x = 0.1 #length of laser measurement device
+
+#Q2C -> Q3C dirft
+d = 1.344 - 0.371 - 0.22525
+print("Q2C -> Q3C dirft", d)
+
+#Q3C -> Q4C dirft
+d = 0.371 - 0.22525
+print("Q3C -> Q4C dirft", d)
+
+#Q4C -> Q5C dirft
+d = 0.1525 + 0.01 + 2.093 - x + 1.574 + 4.178 - x - 0.982 - 0.451 - 0.22525/2 - 0.24025/2
+print("Q4C -> Q5C dirft", d)
+
+#Q5C -> Q6C dirft
+d = 0.451 - 0.24025
+print("Q5C -> Q6C dirft", d)
+
+#Q6C -> scatt. chamber dirft
+d = 0.982 - 0.24025/2
+print("Q6C -> scatt. chamber dirft", d)
+
+#scatt. shamber -> A4 dirft
+d = 2.176 - x - 0.325 - (2.01 - 0.57)/np.pi 
+print("scatt. chamber -> A4 dirft", d)
+
+#A4 -> 15°exit dirft
+d = 0.565
+print("A4 -> 15°exit dirft", d)
