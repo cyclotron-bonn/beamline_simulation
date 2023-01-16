@@ -237,3 +237,10 @@ print("scatt. chamber -> A4 dirft", d)
 #A4 -> 15°exit dirft
 d = 0.565
 print("A4 -> 15°exit dirft", d)
+
+#A4 params
+U = 2.01 - 0.57
+arc = U/2*(1-15/180)
+angle = np.pi*15/180
+h1 = 1/ (2.01 - 0.57)/(2*np.pi)
+print(f"A4: arc= {arc}, angle = {angle}, h1 = h2 = {h1}")
