@@ -1,0 +1,82 @@
+#file for parameters of quadrupoles.
+
+# l effective length (hinterberger)
+# hA halfe apperture
+
+[Q1]
+l  = 0.22525
+hA = 0.02525
+
+[Q2]
+l  = 0.22525
+hA = 0.02525
+
+[A0]
+l=0.262
+angle=0.2096 #rad
+e1 = 0.0
+e2 = 0.0
+h1=7.6
+h2=7.6
+
+[Q3]
+l=0.22525
+hA = 0.02525
+
+[Q4]
+l=0.24025
+hA = 0.04025
+
+[Q5]
+l=0.24025
+hA = 0.04025
+
+[Q6]
+l=0.24025
+hA = 0.04025
+
+[Q7]
+l = 0.201 #geometric value no confidence
+
+[Q8]
+l = 0.201 #geometric value no confidence
+
+[A2]
+l=1.9634
+angle= 1.57079
+e2=0.8726646259972
+e1 = 0.02565634000432 
+h2 = 0.585
+h1 = 0
+
+[Q1C]
+l=0.24025
+hA = 0.04025
+ 
+[Q2C]
+l  = 0.22525
+hA = 0.02525
+
+[Q3C]
+l  = 0.22525
+hA = 0.02525
+
+[Q4C]
+l  = 0.22525
+hA = 0.02525
+
+[Q5C]
+l=0.24025
+hA = 0.04025
+
+[Q6C]
+l=0.24025
+hA = 0.04025
+
+[A4]
+l=0.659
+angle= 0.26179
+e2=0
+e1 = 0
+h2 = 0.110524
+h1 = 0.110524
