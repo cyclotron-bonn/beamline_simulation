@@ -1,0 +1,22 @@
+sddsplot -columnNames=s,Profile synchr.mag | profile.ou
+
+sddsplot -columnNames=s,Sy synchr.s
+sddsplot -columnNames=s,Sx synchr.s
+
+sddsplot -columnNames=s,Particles synchr.cen
+
+sddsplot -columnNames=s,Cx synchr.cen
+sddsplot -columnNames=s,Profile synchr.mag
+sddsplot -columnNames=s,Cy synchr.cen
+sddsplot -columnNames=s,Profile synchr.mag
+
+sddsprintout -columns=s -columns=x -columns=y -columns=particleID synchr.lost out.t
+
+sddsplot -columnNames=s,betax synchr.twi -mode=y=logarithmic
+sddsplot -columnNames=s,betay synchr.twi -mode=y=logarithmic
+sddsplot -columnNames=s,alphax synchr.twi -mode=y=logarithmic
+sddsplot -columnNames=s,alphay synchr.twi -mode=y=logarithmic
+
+sddsprintout -columns="(s,betax)" simout/synchr.twi 
+
+sddsprintout -columns="(ElementName,s,betax,betay,alphax,alphay)" simout/synchr.twi

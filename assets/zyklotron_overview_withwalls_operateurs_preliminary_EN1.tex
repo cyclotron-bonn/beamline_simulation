@@ -1,0 +1,799 @@
+%% zyklotron_....tex  by Dennis Sauerland Okt. 2021
+%% 
+%% tikz-palattice LaTeX package Copyright 2015 J. Schmidt
+
+
+\documentclass[tikz]{standalone}
+%\usepackage[ngerman]{babel}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{iflang}
+\usepackage{txfonts}
+%\usepackage{newtxmath}
+\usepackage{tikz}
+\usepackage{tikz-palattice}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{calc}
+
+\sisetup{range-units=single, range-phrase=\,-\,, detect-weight=true, detect-family=true}
+\addto\extrasngerman{\sisetup{locale = DE}}
+\addto\extrasenglish{\sisetup{locale = US}}
+
+\def\scale{0.5}
+
+\tikzset{biggestlabel/.style={font=\bfseries\Huge,scale=3.1, align=center}}
+\tikzset{biglabel/.style={font=\bfseries\Huge,scale=2.2, align=center}}
+\tikzset{mediumlabel/.style={font=\bfseries\huge,scale=2.0, align=center}}
+\tikzset{smalllabel/.style={font=\Large,scale=2.2, align=center}}
+
+
+
+% ---------------------------------------------------------------------
+% The lattice data given in this file is designated for drawing a map
+% and should not be used for any calculations or simulation!
+% Issues:
+% Several Drift length and some effective Quadrupole length are guessed. 
+% Corrector Magnet between Q7 and Q8 are missing
+%---------------------------------------------------------------------
+
+\begin{document}
+\pgfmathsetmacro\ecrbeamlinestartangle{15} %Startwinkel der Niederenergiestrahlführung
+\pgfmathsetmacro\beamlinestartangle{21.5} %Startwinkel der Hochenergiestrahlführung 21.5
+\pgfmathsetmacro\anulldeflectionangle{12} % Ablenkwinkel des Magneten A0
+
+\pgfmathsetmacro\hochstromplatzangle{{ \beamlinestartangle + \anulldeflectionangle }} %Winkel vom Hochstromplatz
+\pgfmathsetmacro\beamlineanullangle{{ \beamlinestartangle - \anulldeflectionangle }} %Winkel der Beamline ab A0
+\pgfmathsetmacro\startanglesweg{{\beamlineanullangle + 90}}
+\pgfmathsetmacro\angledweg{45}
+\pgfmathsetmacro\angleeweg{22.5}
+
+
+\pgfmathsetmacro\qsechs{0.25}
+\pgfmathsetmacro\driftqsechsqsieben{0.23}%geom 0.247m
+\pgfmathsetmacro\qsieben{0.22}%geom 0.201m
+\pgfmathsetmacro\driftqsiebenqacht{0.22} %geom 0.248
+\pgfmathsetmacro\qacht{0.22} %geom 0.201
+\pgfmathsetmacro\pufferdriftqachtsxvier{{2.3-0.45-0.45-\qsechs-\driftqsechsqsieben-\qsieben-\driftqsiebenqacht-\qacht}}%0.45=distanz Q5-Sx3=Sx3-Q6
+
+\pgfmathsetmacro\pufferdriftsxvierazwei{{1.66-\driftqsechsqsieben - \qsieben - \driftqsiebenqacht - \qacht - \pufferdriftqachtsxvier}}
+
+\pgfmathsetmacro\driftazweisteinss{1.2}
+\pgfmathsetmacro\pufferdriftsxvierqeinss{{2.3 - \pufferdriftsxvierazwei}}
+% \pgfmathsetmacro
+% \pgfmathsetmacro
+% \pgfmathsetmacro
+
+\begin{lattice}[\scale]
+\def\quadl{0.2}
+\setelementcolor{dipole}{red}[red]
+\setelementcolor{solenoid}{cyan}
+\setelementcolor{quadrupole}{blue}
+\setlinecolor{drift}{red!30!black}
+\def\photonbeam{black}
+% "switch labels off": white
+\setlabelfont{\tiny}
+\setlabelcolor{black}
+
+\drawrule{(10,-1.25)}[1][2.3][0.1]
+%\completelegend{(8,12)}[1]
+%\setangle{180}
+%\start{(0,0)}
+
+\coordinate (zykl_center) at (0,0);
+
+
+\path (zykl_center) -- ++({\ecrbeamlinestartangle}:{-5.385cm}) coordinate (ECRsourcestart);
+
+
+%Niederenergiestrahlführung (alle Maße abgeschätzt aus Graphik ecr_strf.jpg)
+\goto{ECRsourcestart}
+\setangle{\ecrbeamlinestartangle}
+\source{}{1.12}[0.5]%ECR Source
+\drift{0.08}
+\solenoid{GL}{0.1}[0.2]
+\drift{0.22}
+\setlabeldistance{0.15}
+\quadrupole{Q1}{0.12}[0.2]
+\resetlabeldistance
+\drift{0.11}
+\dipole{M1}{0.15}{0}[s][0.2] %Ablenkung um 45° nach unten % Nachfolgende Längen sind daher nur Projektionen in die Horizontale
+\savecoordinate{AustrittspunktM1}
+\drift{0.075}
+\setlabeldistance{0.15}
+\quadrupole{Q2}{0.085}[0.2]
+\drift{0.155}
+\setlabeldistance{0.35}
+\quadrupole{Q3}{0.085}[0.2]
+\drift{0.1}
+\setlabeldistance{0.15}
+\quadrupole{Q4}{0.085}[0.2]
+\resetlabeldistance
+\drift{0.11}
+\northlabels
+\setlabeldistance{0.15}
+\corrector{K1}{0.1275}[0.2]
+\southlabels
+\drift{0.135}
+\quadrupole{Q5}{0.085}[0.2]
+\drift{0.335}
+\resetlabeldistance
+\quadrupole{Q6}{0.085}[0.2]
+\drift{0.155}
+\setlabeldistance{0.15}
+\quadrupole{Q7}{0.085}[0.2]
+\resetlabeldistance
+\drift{0.155}
+\quadrupole{Q8}{0.085}[0.2]
+\drift{0.06}
+\northlabels
+\setlabeldistance{0.15}
+\dipole{M2}{0.13}{0}[s][0.2]
+\resetlabeldistance
+\southlabels
+\savecoordinate{AustrittspunktM2}
+\drift{0.115}
+\screen{Cup1}
+
+%M2 bis Cup0
+\goto{AustrittspunktM1}
+\setangle{\ecrbeamlinestartangle}
+\drift{0.1}
+\northlabels
+\setlabeldistance{0.15}
+\screen{Cup0}
+\resetlabeldistance
+
+%M2 bis M3
+\goto{AustrittspunktM2}
+\setangle{\ecrbeamlinestartangle}
+\southlabels%
+\drift{0.105}
+\quadrupole{Q9}{0.12}[0.2]
+\drift{0.105}
+\quadrupole{Q10}{0.12}[0.2]
+\drift{.11}
+\quadrupole{Q11}{0.12}[0.2]
+\drift{0.295}
+\quadrupole{Q12}{0.12}[0.2]
+\drift{0.195}
+%Dipol M3 als 90°Umlenker ins Zyklotron
+\savecoordinate{zykl_injektion}
+
+
+\coordinate (zykl_topright) at ($ (zykl_center) + (1.15cm,2.6cm) $);
+\coordinate (zykl_topleft) at ($ (zykl_center) + (-1.15cm,2.6cm) $);
+\coordinate (zykl_bottomright) at ($ (zykl_center) + (1.15cm,-2.6cm) $);
+\coordinate (zykl_bottomleft) at ($ (zykl_center) + (-1.15cm,-2.6cm) $);
+
+%Treppenabgang unters Zyklotron
+\draw[black] ($ (zykl_topleft) + (0,-1.1) $) rectangle ++(-1.5,-0.9);
+\draw[black] ($ (zykl_topleft) + (0,-1.1) + (-1.5,-0.9) + (0,0.45) + (0,-0.2) $) rectangle ++(0.7,0.4);
+\draw[black] ($ (zykl_topleft) + (0,-1.1) + (-1.5,-0.9) + (0,0.45) + (0,-0.2) $) --++(0.1,0)--++(0,0.4)--++(0.1,0)--++(0,-0.4) --++(0.1,0)--++(0,0.4)--++(0.1,0)--++(0,-0.4) --++(0.1,0)--++(0,0.4)--++(0.1,0)--++(0,-0.4);
+
+
+%Zyklotron
+\fill[draw=black,fill=red] (1.15cm,0) -- ++(0,2.6cm) -- ++(-2.3cm,0) -- ++(0,-5.2cm) -- ++(2.3cm,0) -- cycle;
+% \draw (0,0) circle [radius=1.2cm];
+\fill[draw=black,fill=gray!50!white] ($ (0,0) + (-30:1.2cm) + (1.4cm,0) + (-.25,0) $) rectangle ++(-2.5,-0.79);
+\fill[draw=black,fill=gray!50!white] ($ (0,0) + (30:1.2cm) + (1.4cm,0) + (-.95,0) $) rectangle ++(-2.0,0.74);
+\foreach \s in {0, 120, 240}{
+\fill[draw=black,fill=green!70!black, rotate=\s] (zykl_center) -- ++(-30:1.2cm) -- ++(1.4cm,0)-- ++(0cm,1.2cm) -- ++(-1.4cm,0) -- cycle;
+ \fill[draw=black,fill=white!40!black, rotate=\s] (zykl_center) -- ++(30:1.2cm) arc[start angle = 30, end angle = 90, radius=1.2cm] -- cycle;
+}
+%Teilchenstrahl im Zyklotron
+\pgfmathsetmacro\cyclotronrevolutions{12} %Anzahl der sichtbaren Umläufe des Strahls im Zyklotron
+\draw [draw=red!30!black,domain=-{\cyclotronrevolutions*2*3.141592-(\beamlinestartangle+45+2)/360*2*3.141592}:0,variable=\t,smooth,samples=1000]
+        plot ({\t r}: {(0.9/(\cyclotronrevolutions+(\beamlinestartangle+45)/360)/2)/3.141592*\t});
+%Debug: Stimmt die Zeichnung ecr_strf.jpg? <-Nein
+% \draw[very thick] (zykl_injektion) circle [radius=0.1];
+
+%Berechnung Extraktion aus Zyklotron
+% \draw (0,0) circle [radius=0.9cm];
+\path (0,0) -- ++(0,0.9cm) arc[start angle=90, end angle ={90+\beamlinestartangle}, radius=0.9cm] coordinate (zykl_extraktion);
+
+
+%Nachzeichnen des Strahlwegs zwischen Zykl und SH0
+\path[draw=red!30!black] (zykl_extraktion) -- ++ (\beamlinestartangle:0.80cm) coordinate (zykl_extr_ort);
+\draw[red!30!black] (zykl_extr_ort) -- ++ (\beamlinestartangle:0.90cm);
+
+
+
+%Zyklotron Extraktion bis A0
+\goto{zykl_extraktion}
+\setangle{\beamlinestartangle}
+\drift{1.7}%Endpunkt der Zyklotronextraktion X
+% \valve{V1} 
+\drift{0.05}
+\setlabeldistance{0.15}
+\corrector{SH0}{0.085}
+\resetlabeldistance
+\drift{0.05} % Länge X bis Q1 = 1m
+\savecoordinate{quadeins}
+\quadrupole{Q1}{0.22635}[0.45]
+\drift{0.15}
+\savecoordinate{quadzwei}
+\quadrupole{Q2}{0.22635}[0.45]
+\drift{0.05}
+\setlabeldistance{0.2}
+\screen{ST1}
+\resetlabeldistance
+\drift{0.08}%Hinterberger Lattice: Länge Q2 - A0 = 0.28 % NB: Schirmlänge=0.2m in palattice
+\savecoordinate{EintrittA0}
+\northlabels
+\dipole{\normalsize{A0}}{0.264}{0}[rectangle]% effektive Länge 0.262
+\savecoordinate{AblenkpunktA0}[center]
+
+
+%Berechnung Austrittskoordinaten A0
+\path (EintrittA0) arc[radius=1.25, start angle = {\beamlinestartangle-90-180}, delta angle={-\anulldeflectionangle}] coordinate (AustrittA0);
+\path (EintrittA0) arc[radius=1.25, start angle = {\beamlinestartangle-90}, delta angle={\anulldeflectionangle}] coordinate (AustrittA0_HC);
+
+
+
+%A0 bis Ende C-Weg
+%\goto{AblenkpunktA0}
+\goto{AustrittA0}
+\setangle{\beamlineanullangle}
+\southlabels
+\drift{0.15} 
+\setlabeldistance{0.5}
+\valve{SX1/SY1}[0.02]%SX1/SY1
+\drift{0.21}% %hinterberger lattice: A0 bis Q3=0.46 % Änderung aufgrund von Messung
+\setlabeldistance{0.35}
+\savecoordinate{quaddrei}
+\quadrupole{Q3}{0.2276}[0.45]
+\drift{0.3}
+\setlabeldistance{0.25}
+\valve{SX2/SY2}[0.02]
+\resetlabeldistance
+\drift{0.3845}%Länge Q4 - Q3 = 0.6845
+\savecoordinate{quadvier}
+\quadrupole{Q4}{0.243}[0.45]
+\drift{0.15}
+% \valve{V3}
+\drift{0.20}%Hinterberger lattice: Länge Q4 - A1 = 0.45m!! %Änderung aufgrund von Messung
+\savecoordinate{EintrittA1}
+\turnlabels
+\dipole{\normalsize{A1}}{1.9634}{90}[s][0.35]
+\savecoordinate{A1_beamexit}
+\turnlabels
+\drift{1.66}%
+\quadrupole{Q5}{0.25}[0.65]
+\drift{0.45}
+\setlabeldistance{0.15}
+\valve{SX3}[0.02]%SX3
+\resetlabeldistance
+\drift{0.2}
+% \valve{V5}
+\drift{0.25}%Länge SX3 - Q6 = 0.45
+\quadrupole{Q6}{\qsechs}[0.65]
+\savecoordinate{qsechsende}
+\drift{\driftqsechsqsieben}
+\quadrupole{Q7}{\qsieben}[0.35]
+\savecoordinate{qsiebenende}
+\drift{\driftqsiebenqacht}
+\quadrupole{Q8}{\qacht}[0.35]
+\savecoordinate{qachtende}
+\drift{\pufferdriftqachtsxvier}%Länge Q5 - SX4=2.3
+\setlabeldistance{0.15}
+\valve{SX4}[0.02]%SX4
+\savecoordinate{sxvier}[center]
+\resetlabeldistance
+\drift{\pufferdriftsxvierazwei} %Länge Q6 - A2 = 1.66
+\savecoordinate{AblenkpunktA2}
+\northlabels
+\dipole{\normalsize{A2}}{1.9634}{90}[s][0.35]
+\savecoordinate{AustrittA2}
+\drift{0.45}
+\quadrupole{Q1C}{0.24025}[0.45]
+\drift{0.2}
+\screen{ST1C}
+\drift{0.2845}%Länge Q1C - Q2C=0.6845 NB: screenlänge=0.2
+\quadrupole{Q2C}{0.2276}[0.45]%0.22525
+\drift{0.26}
+\southlabels
+\valve{SX1C/SY1C}[0.02]%SX1C/SY1C
+\northlabels
+\drift{0.49}%geometrisch s(Q3C) - s(Q2C) = 0.77
+\quadrupole{Q3C}{0.22635}[0.45]
+\drift{0.18}
+\quadrupole{Q4C}{0.22635}[0.45]
+\drift{0.2}
+% \valve{V1C}
+\drift{0.2}
+\savecoordinate{StrahlplatzC0}
+\drift{0.2}
+\screen{ST2C}
+\drift{5.17}%geratenee Driftlänge
+\quadrupole{Q5C}{0.22}[0.65]
+\drift{0.2}
+\quadrupole{Q6C}{0.22}[0.65]
+\drift{0.7}
+% \valve{V3C}
+\drift{0.5}
+\savecoordinate{StrahlplatzC1}%SP2
+\drift{0.2}
+% \valve{V4C}
+\drift{0.5}
+\northlabels
+\setlabeldistance{0.4}
+\corrector{SH6C/SV6C}{0.2}
+\northlabels
+\drift{0.2}
+\setlabeldistance{0.75}
+\savecoordinate{EintrittA4}
+\dipole{\normalsize{A4}}{0.75}{-39}[r][1.5]%A4
+\resetlabeldistance
+
+%debug zur überprüfung der symmetrie (Q5-Sx4=Sx4-Q1S) des S-wegs
+% \draw[red] (sxvier)--++({\startanglesweg}:2.3);
+% \draw[red] (sxvier)--++({\startanglesweg}:-2.3);
+%\fill[black] (sxvier) circle[radius=0.1];
+
+%debug für Winkelbestimmung Zyklotron
+% \draw[green] (qsechsende) --++(1.339,0);
+% \draw[green] (qsiebenende) --++(1.416,0);
+% \draw[green] (qachtende) --++(1.51,0);
+
+%debug zur Längenüberprüfung Hochenergiestrahlführung bis A1
+% \draw[green] (quadeins) --++(-.27,0);
+% \draw[green] (quadzwei) --++(-.608,0);
+% \draw[green] (AustrittA0) --++(-1.3,0);
+% \draw[green] (quaddrei) --++(-1.781,0);
+% \draw[green] (quadvier) --++(-2.681,0);
+% \draw[green] (EintrittA1) --++(-3.259,0);
+% \draw (EintrittA0) circle[radius=0.1];
+
+
+%Koordinatenberechnung 15°Ausgang aus dem A4
+\path (EintrittA4) arc[radius={{0.75/2/3.141692*360/15}}, start angle = {\startanglesweg-90-90}, delta angle=-15] coordinate (spc_start);
+
+%Rest des C-Wegs bis zum Strahlaustritt
+\goto{spc_start}
+\setangle{{\startanglesweg+90-15}}
+\drift{0.58}
+\savecoordinate{StrahlplatzC2}
+
+\fill[black] (StrahlplatzC0) circle[radius=0.1cm];
+\node at ($ (StrahlplatzC0) + (0.1cm,-0.35cm) $) {1};
+\fill[black] (StrahlplatzC2) circle[radius=0.1cm];
+\node at ($ (StrahlplatzC2) + (0cm,-0.4cm) $) {2a};
+
+%Streukammer 2
+\fill[gray,draw=black] (StrahlplatzC1) circle[radius=0.35cm];
+\fill[black] (StrahlplatzC1) circle[radius=0.1cm];
+\node at ($ (StrahlplatzC1) + (0cm,-0.55cm) $) {2};
+\node at ($ (StrahlplatzC1) + (0cm,0.75cm) $) {\footnotesize{Scattering}};
+\node at ($ (StrahlplatzC1) + (0cm,0.5cm) $) {\footnotesize{Chamber}};
+
+
+%A1 Kantenfokussierung
+\fill[draw=black,fill=red] (EintrittA1) -- ++({\beamlineanullangle+40+90}:0.098cm) -- ++ ({\beamlineanullangle+90}:0.1cm) -- ++ ({\beamlineanullangle}:0.15cm);
+\fill[draw=white,fill=white] (EintrittA1) -- ++({\beamlineanullangle-50}:0.098cm) -- ++ ({\beamlineanullangle-90}:0.2cm) -- ++ ({\beamlineanullangle-90-90}:0.2cm);
+\draw[black] (EintrittA1) -- ++({\beamlineanullangle-50}:0.098cm) -- ++ ({\beamlineanullangle-90}:0.106cm);
+
+%A2 Kantenfokussierung
+\fill[draw=black,fill=red] (AustrittA2) -- ++({\beamlineanullangle-40-90}:0.098cm) -- ++ ({\beamlineanullangle-90}:0.1cm) -- ++ ({\beamlineanullangle}:0.15cm) ;
+\fill[draw=white,fill=white] (AustrittA2) -- ++({\beamlineanullangle+40}:0.098cm) -- ++ ({\beamlineanullangle+90}:0.2cm) -- ++ ({\beamlineanullangle+90+90}:0.2cm);
+\fill[fill=red] (AustrittA2) -- ++({\beamlineanullangle+50}:0.098cm)  -- ++ ({\beamlineanullangle+90}:0.1cm) -- ++ ({\beamlineanullangle-3.5}:1.05cm) -- ++ ({\beamlineanullangle-90}:0.2) -- ++ ({\beamlineanullangle}:0.314) -- ++({\beamlineanullangle-90}:1.1) -- ++({\beamlineanullangle-180}:0.2) -- ++ ({\beamlineanullangle+90}:0.65);
+\draw[black] (AustrittA2) -- ++({\beamlineanullangle+50}:0.098cm)  -- ++ ({\beamlineanullangle+90}:0.1cm) -- ++ ({\beamlineanullangle-3.5}:1.05cm) -- ++ ({\beamlineanullangle-90}:0.2) -- ++ ({\beamlineanullangle}:0.314) -- ++({\beamlineanullangle-90}:1.1);
+
+
+%Hochstromplatz
+\goto{AustrittA0_HC}
+\setangle{\hochstromplatzangle}
+%\dipole{}{0.2}{12}[rectangle]
+\drift{0.8}
+% \valve{V1H}
+% \drift{1}%Hochstromplatz
+\savecoordinate{Hochstromplatz}
+
+%Bestrahlungsburg am Hochstromplatz
+\fill[draw=black, fill=gray] (Hochstromplatz) -- ++({\hochstromplatzangle -90}:0.2cm) -- ++(\hochstromplatzangle:1.2cm) -- ++({\hochstromplatzangle +90}:0.4cm) -- ++(\hochstromplatzangle:-1.2cm) -- cycle;
+
+
+
+%S-Weg
+\goto{AblenkpunktA2}
+\setangle{\startanglesweg}
+\southlabels
+% \drift{\driftazweisteinss}%kosmetisch wegen form A2
+\setlabeldistance{0.25}
+\northlabels
+\drift{\pufferdriftsxvierqeinss}% Länge Q5 bis Q1S = 2.3 bzw. Ablenkpunkt A2 - Q1S = 2.3-0.46=1.86
+\quadrupole{Q1S}{0.25}[0.65]%0.24025 lt Hinterberger 70
+\drift{0.1}
+\resetlabeldistance
+\setlabeldistance{0.05}
+\southlabels
+\screen{ST1S}
+\resetlabeldistance
+\drift{0.1}
+% \valve{V1S}
+\drift{1.26}%Länge Q1S bis A3 = 1.66 %NB: Länge Screen 0.2m
+\savecoordinate{AblenkpunktA3}
+\dipole{\normalsize{A3}}{1.9634}{-90}[s][0.35]
+\savecoordinate{AustrittA3}
+\drift{0.45}
+\quadrupole{Q2S}{0.24025}[0.45]
+\drift{0.2}
+% \valve{V3S}
+\drift{0.4845}%Länge Q2S - Q3S = 0.6845
+\quadrupole{Q3S}{0.2276}[0.45]%0.22525
+\drift{0.26}
+\setlabeldistance{0.15}
+\valve{SX1S}[0.02]%SX1S
+\resetlabeldistance
+\drift{0.32}
+\turnlabels
+\corrector{SV1S/SH1S}{0.26}%nur geometrische länge
+\turnlabels
+\drift{0.13}%geom 0.14
+\quadrupole{Q4S}{0.22635}[0.45] %eff. Länge geschätzt
+\drift{0.18}%geom 0.2
+\quadrupole{Q5S}{0.22635}[0.45] %eff. Länge geschätzt
+\drift{0.18}%geom 0.2
+\quadrupole{Q6S}{0.22635}[0.25] %eff. Länge geschätzt
+\drift{0.13}%geschätzt
+\turnlabels
+\corrector{SV2S/SH2S}{0.12}%nur geometrische länge
+\turnlabels
+\drift{0.69}%grob gemessen 0.7m
+\quadrupole{Q7S}{0.22635}[0.35] %eff. Länge geschätzt
+\drift{0.18}%geom 0.2
+\quadrupole{Q8S}{0.22635}[0.35] %eff. Länge geschätzt
+\drift{0.18}%geom 0.2
+\quadrupole{Q9S}{0.22635}[0.35] %eff. Länge geschätzt
+\drift{0.3}
+\savecoordinate{StrahlplatzS}
+
+\fill[black] (StrahlplatzS) circle[radius=0.1cm];
+\node at ($ (StrahlplatzS) + (0cm,-0.4cm) $) {4};
+
+%debug
+% \draw[green] (StrahlplatzS) -- ++(0,3.445);
+% \draw[green] (StrahlplatzS) -- ++(4.34,0);
+
+% \drift{0.2}
+% \corrector{SV1S}{0.2}
+% \drift{0.2}
+% \corrector{SH1S}{0.2}
+% \drift{0.2}
+% \quadrupole{Q4S}{0.22635}[0.3]
+% \drift{0.2}
+% \quadrupole{Q5S}{0.22635}[0.3]
+% \drift{0.2}
+% \quadrupole{Q6S}{0.2}[0.3]
+% \drift{0.2}
+% \corrector{SV2S}{0.2}
+% \drift{0.2}
+% \corrector{SH2S}{0.2}
+% \drift{0.2}
+% \valve{V4S}
+% \drift{0.2}%SP4a
+% \drift{1.2}%SP4
+
+%A3 Kantenfokussierung
+\fill[draw=black,fill=red] (AustrittA3) -- ++({\beamlineanullangle+50}:0.098cm) -- ++ ({\beamlineanullangle+90}:0.1cm) -- ++ ({\beamlineanullangle-180}:0.15cm);
+ \fill[draw=white,fill=white] (AustrittA3) -- ++({\beamlineanullangle-40-90}:0.098cm) -- ++ ({\beamlineanullangle-90}:0.2cm) -- ++ ({\beamlineanullangle}:0.2cm);
+\draw[black] (AustrittA3) -- ++({\beamlineanullangle-40-90}:0.098cm) -- ++ ({\beamlineanullangle-90}:0.106cm);
+
+
+%F-Weg
+\goto{AblenkpunktA3}
+\setangle{\startanglesweg}
+\drift{3.0}%SP5 % länge falsch
+\savecoordinate{StrahlplatzF}
+
+\fill[black] (StrahlplatzF) circle[radius=0.1cm];
+\node at ($ (StrahlplatzF) + (-0.2cm,-0.2cm) $) {5};
+
+%Koordinatenberechnung Austritt D- und E-Weg
+\path (AblenkpunktA2) arc[radius=1.966, start angle = {\startanglesweg-90}, delta angle=\angledweg] coordinate (dwegstart);
+\path (AblenkpunktA2) arc[radius=3.562, start angle = {\startanglesweg-90}, delta angle=\angleeweg] coordinate (ewegstart);
+
+
+
+
+%D-Weg
+\goto{dwegstart}
+\setangle{{\startanglesweg + 45}}
+\southlabels
+\drift{1.95}
+\setlabeldistance{0.05}
+\screen{ST1D}%ST1D
+\drift{0.55}
+\resetlabeldistance
+% \valve{V1D}
+% \drift{0.3}%Hinterberger Strecke A2 bis Q1D(aka D71) = 2.5m %NB: screenlänge=0.2m <-aus optischen gesichtspunkten ignoriert
+\southlabels
+\setlabeldistance{0.2}
+\quadrupole{Q1D}{0.25}[0.45]
+\drift{0.2}
+%\drift{0.2} Hinterberger sagt weg
+\quadrupole{Q2D}{0.25}[0.45]
+\resetlabeldistance
+\drift{0.2}
+% \valve{VH1D}
+\drift{0.8}
+\drift{0.42}
+%SP 7
+\savecoordinate{StrahlplatzD1}%Hinterberger Strecke Q2D(aka D72) bis SP7 = 1.42m
+\drift{0.1}
+% \valve{VH2D}
+\drift{0.1}
+\drift{0.2}
+% \valve{VH3D}
+\northlabels
+\drift{3.5}
+\quadrupole{Q3D}{0.22}[0.33]
+\drift{0.18}
+\quadrupole{Q4D}{0.22}[0.33]
+\drift{0.18}
+\quadrupole{Q5D}{0.22}[0.33]
+\drift{0.2}
+\corrector{SV2D/SH2D}{0.2}
+\drift{0.2}
+% \valve{V4D}
+\drift{0.4}
+\drift{1.2}%SP8
+\savecoordinate{StrahlplatzD}
+
+\fill[black] (StrahlplatzD) circle[radius=0.1cm];
+\node at ($ (StrahlplatzD) + (0cm,-0.4cm) $) {8};
+
+\fill[black] (StrahlplatzD1) circle[radius=0.1cm];
+\node at ($ (StrahlplatzD1) + (0cm,-0.4cm) $) {7};
+
+
+%E-Weg
+\goto{ewegstart}
+\southlabels
+\setangle{{\startanglesweg + 22.5}}
+\drift{1}
+\northlabels
+\setlabeldistance{0.05}
+\screen{ST1E}%ST1E
+\resetlabeldistance
+% \valve{V1E}
+\drift{1.3} %Hinterberger: Distanz zw. A2 und Q1E(aka D61) = 2.5m %NB: screenlänge=0.2m
+\southlabels
+\setlabeldistance{0.2}
+\quadrupole{Q1E}{0.22635}[0.45]
+\drift{0.2}
+\quadrupole{Q2E}{0.22635}[0.45]
+\resetlabeldistance
+\drift{1.92}%Hinterberger: Distanz zw. Q2E(aka D62) und SP6 = 1.42m %geändert wegen optik
+%SP6
+% \drift{0.2}
+% \valve{V3E}
+% \drift{2.2}
+%SP6a
+\savecoordinate{StrahlplatzE}
+
+\fill[black] (StrahlplatzE) circle[radius=0.1cm];
+\node at ($ (StrahlplatzE) + (0cm,-0.4cm) $) {6};
+
+%Beschriftung
+
+
+\node at ($ (zykl_center) + (0cm,3cm) $) {\Large{\textbf{Isochronous Cyclotron}}};
+
+\node at ($ (Hochstromplatz) + (0.3cm,1.3cm) $) {\large{\textbf{High Current}}};
+\node at ($ (Hochstromplatz) + (0.3cm,0.9cm) $) {\large{\textbf{Site}}};
+
+\node at ($ (StrahlplatzS) + (1.0cm,0.35cm) $) {\large{\textbf{Beamline}}};
+\node at ($ (StrahlplatzS) + (1.0cm,-0.15cm) $) {\large{\textbf{\textit{S}}}};
+
+\node at ($ (StrahlplatzE) + (-0.85cm,0.5cm) $) {\large{\textbf{Beamline}}};
+\node at ($ (StrahlplatzE) + (-0.85cm,0.0cm) $) {\large{\textbf{\textit{E}}}};
+
+\node at ($ (StrahlplatzF) + (0.0cm,1.0cm) $) {\large{\textbf{Beamline}}};
+\node at ($ (StrahlplatzF) + (0.0cm,0.5cm) $) {\large{\textbf{\textit{F}}}};
+
+\node at ($ (StrahlplatzD) + (-1.0cm,0.35cm) $) {\large{\textbf{Beamline}}};
+\node at ($ (StrahlplatzD) + (-1.0cm,-0.15cm) $) {\large{\textbf{\textit{D}}}};
+
+\node at ($ (StrahlplatzC2) + (-2.0cm,-0.0cm) $) {\large{\textbf{Beamline \textit{C}}}};
+% \node at ($ (StrahlplatzC2) + (-1.0cm,-0.15cm) $) {\large{\textbf{\textit{C}}}};
+
+\node at ($ (ECRsourcestart) + (0.1cm,0.65cm) $) {\large{\textbf{ECR Source}}};
+
+%
+%
+%Walls (Raummaße teilweise nach Gebäudeplan teilweise nachgemessen, Betonabschirmung nach Messung via Laser-Distanzmessgerät/Zollstock)
+%
+%
+
+
+%debug
+%\fill[black] (zykl_bottomright) circle[radius=0.1cm];
+%gemessener Abstand A1-Exit und Wand
+% \draw[green] (A1_beamexit) -- ++ (0.8cm,0cm);
+% \draw[green](AblenkpunktA2)--++(1.6,0)--++(0,-7);
+
+
+%Gebäudeumrisse, Bunkertüren und weitere Infrastruktur
+\begin{scope}[opacity=1]
+
+%Grundriss Bunker Teil 1
+\draw[black] ($ (zykl_bottomright) + (5cm,-2.75cm) $) -- ++(-14cm,0cm) -- ++(0cm,8.5cm) -- ++(3.5cm,0cm) -- ++ (45:1.42cm) coordinate (bunker_amwinkel);
+\draw[black] ($ (zykl_bottomright) + (5cm,-2.75cm) $) -- ++(0cm,9.9cm) coordinate (bunker_EckeTR) --++(0,2);
+
+\draw[black] (bunker_EckeTR) --++(-2.5cm,0cm) -- ++(0cm,0.675cm) coordinate (bunker_oben) --++(2.5,0);
+
+
+
+
+%Grundrisse des Hochstromraumes
+\draw[black] ($ (StrahlplatzC2) + (-6.781cm,-1.665cm) $) -- ++(08.8cm,0cm) -- ++(0cm,-0.3cm)coordinate(HSRtest2)-- ++(2.1cm,0cm);
+\draw[black] ($ (StrahlplatzC2) + (-6.781cm,-1.665cm) $) -- ++(0cm,3.40cm) -- ++(5.63cm,0cm) -- ++(0cm,1.25cm) coordinate(HochstromraumAusg1);
+\draw[black] ($ (HochstromraumAusg1) + (1.8cm,0.cm) $) -- ++(0cm, -1.25cm) -- ++(0.26cm,0cm) -- ++(0cm,-0.525cm) -- ++(3.6cm,0cm) coordinate(HSRtest1) -- ++(0cm,-2.750) -- ++(45:-0.57);
+\coordinate (HochstromraumAusg2) at ($ (HochstromraumAusg1) + (1.8cm,0.cm) $);
+%HSR-Labels
+% \node[text opacity=1] at ($ (HochstromraumAusg1) + (-2cm,-1.7cm) $) {\Large{\textbf{High Current Room}}};
+% \node[rounded corners, draw=black, text=red, text opacity=1] at ($ (StrahlplatzC2) + (-2cm,0.5cm) $) {\large{\textbf{Irradiation Site}}};
+
+%debug
+% \draw[red] (HSRtest1) -- ++ (2,0);
+% \draw[red] (HSRtest2) -- ++ (0,-2);
+
+%Vorraum Hochstromraum + Sperrbereichslager
+\draw[black] (HochstromraumAusg1) -- ++ (-5.63,0) -- ++ (0cm,1.25) --++(3.75,0)--++(0,0.5)--++(-0.25,0)--++(0,-0.25)--++(-3.5,0) --++ (0cm,2.5cm) coordinate (HSRVorraumEckeUL) -- ++ ($ (5.63cm,0cm) + (0.13cm,0cm) + (-2.26,0) $) --++(0,-0.25)--++(0.25,0)--++(0,0.25)--++(2.01,0) coordinate (HSRVorraumAusgangUp) -- ++ (0,0.55555555);.
+\draw[black] ($ (HSRVorraumAusgangUp) + (1cm,0cm) $) -- ++ (0,0.55555555);
+\draw[black] ($ (HSRVorraumAusgangUp) + (1cm,0cm) $) -- ++ (0.93cm,0) -- ++ (0cm,-0.5)--++(0.95,0) coordinate (HSRvorraumAusgangB1);
+\draw[black] (HochstromraumAusg2) -- ++ (0.26,0) -- ++ (0,1.71) -- ++ (0.95,0) coordinate (HSRVorraumAusgB);
+
+
+%Experimentierhalle
+%debug:
+% \draw[black] (HSRvorraumAusgangB1) -- ++ (0cm,4.3cm)-- ++ (22.5cm,0cm);
+% \draw[black] (HSRvorraumAusgangB1) -- ++ (0cm,4.3cm)-- ++ (14cm,0cm);
+\draw[black] (HSRvorraumAusgangB1) -- ++ (0cm,4.3cm)-- ++(1cm,0cm)--++(0cm,1cm)--++(3.363,0) coordinate (ExpHalleAusgU)--++(85:0.5);
+\draw[black] ($ (ExpHalleAusgU) + (1.94cm,0cm) $) -- ++ (95:0.5);
+\draw[black] ($ (ExpHalleAusgU) + (1.94cm,0cm) $) -- ++ (0.06,0cm) --++(0,-0.59)--++(0.1,0)--++(0,-0.5) coordinate(ExpHalleTuer) -- ++ (7.537cm,0cm) -- ++ (0cm,-0.8cm) coordinate (SpektrometerhalleU)--++(1cm,0cm)--++(0cm,0.4cm)--++(0.65,0) --++(0,-0.25cm) --++(1.45,0) --++(0,0.3)--++(45:0.64)--++(3.3,0) coordinate(ExpHalleTest1)--++(-45:0.69)--++(0,-0.25)--++(1.13,0)--++(0,-5)--++(-1.13,0)--++(0,-0.25)--++(45:-0.69)--++(-3.29,0)--++(-45:-0.69)--++(0,0.25)--++(-1.45,0)--++(0,-0.25)--++(-0.65,0)--++(0,0.4cm)--++(-0.840,0) coordinate (SpektrometerhalleD); %Letze Länge eher (-1,0)´
+%debug
+% \draw[red] (ExpHalleAusgU) --++(0,-6.7);
+% \draw[red] (ExpHalleTest1) -- ++ (0cm,-6.5);
+% \draw[red] (SpektrometerhalleU) -- ++ (0cm,-4.7);
+
+%debug orientierungstest zwischen SpekHalle und Bunker
+% \draw[red] (SpektrometerhalleD) -- ++ (0cm,-17.8cm);
+
+\draw[black] (HSRVorraumAusgB) --++(0cm,-0.12cm) --++(0.1,0) -- ++(20:0.6cm)coordinate(ExpHalleD2)--++(-70:0.24)--++(20:-0.78);
+\draw[black] ($ (ExpHalleD2) + (20:0.6) $) --++(20:0.5)--++(2.93,0)--++(0,0.11cm)--++(0.5,0) coordinate (ExpHalleEingang1)--++(0,-0.5) coordinate(Treppenraum1);
+%(20:1.79cm)--++(2.93,0)--++(0,0.11cm)--++(0.49,0) coordinate (ExpHalleEingang1)--++(0,-0.09)--++(-0.06,0);
+
+\draw[black] ($ (ExpHalleEingang1) + (1.30,-0.1) $) --++(0.435,0)--++(0,-1.2,0)--++(0.25,0)--++(-45:0.39)--++(0.5cm,0cm) coordinate (ExpHalleD1);%--++(5.75,0);
+\draw[black] (SpektrometerhalleD)--++(0,-1.6);
+
+%Zwischenraum
+\draw[black] ($ (ExpHalleEingang1) + (1.30,-0.1) $) --++(0,-0.09) --++(0.06,0) coordinate(trepperef) --++(0,-1.4) --++(-0.35,0)--++(0,-0.73)--++(0.21,0)--++(0,-0.7)--++(-0.21,0)--++(0,-0.5) coordinate (Zwischenraumtest1) --++(1.2,0)--++(0,0.8) --++(3.1,0) coordinate(ZwischenraumU1) --++(0,0.5)--++(-0.5,0)--++(0,0.5)--++(-1,0)--++(0,0.15)--(ExpHalleD1); 
+\draw[black] ($ (ZwischenraumU1) + (2.7,0) $) -- ++(1,0) --++(0,-4.8) coordinate (ZwischenraumD1) --++(0,-2);
+\draw[black] ($ (ZwischenraumD1) + (-2.15,0) $)
+--++(0,1.2)--++(-4.65,0)--++(0,0.3)--++(-1.2,0)--++(0,-1.5) coordinate (ZwischenraumBunker1);
+%debug
+% \draw[red] (Zwischenraumtest1)--++(0,-2.5);
+% \draw[red] (Zwischenraumtest1)--++(-1.5,0);
+
+\draw[black] ($ (ZwischenraumU1) + (2.7,0) $) --++(0,0.5)--++(-0.3,0)--++(0,0.56)--++(1.3,0) coordinate (ExphalleEckeD)--++(0,1.61);
+% 1.15)--++(1,0)--++(0,1.61);
+
+%Treppe
+\draw[ black] ($ (trepperef) + (-1.866,-0.085) + (0,-0.5)+(0,0.09)+(0,0.1) $) coordinate(treppenstart) rectangle ++(-2,-0.85);
+\draw[black] (treppenstart) -- ++ (-0.25,0)--++(0,-0.85)--++(-.25,0)--++(0,0.85)-- ++ (-0.25,0)--++(0,-0.85)--++(-.25,0)--++(0,0.85)-- ++ (-0.25,0)--++(0,-0.85)--++(-.25,0)--++(0,0.85)-- ++ (-0.25,0)--++(0,-0.85)--++(-.25,0)--++(0,0.85);
+\draw[->,  black] ($ (treppenstart) + (-1.125,-0.425) $) --++(-1.5,0);
+
+%Treppenraum
+\draw[ black] (bunker_amwinkel) --++(0,5.571cm) --++ (-3.36,0) -- ++ (0,1.5)--++(-0.25,0)--++(0,-1.0)--++(-1,0)--++(0,1.55);
+\draw[ black] (Treppenraum1) --++(-0.49,0) --++(0,.14)--++(-2.85,0)--++(20:-0.5)--++(-70:-0.25);
+
+
+%Bunker Teil 2 (Oben)
+\draw[black] (ZwischenraumBunker1) --++(5.85,0);
+
+
+%HF-Generator
+\draw[black] ($ (zykl_bottomright) + (0.09,1.9)-(0,1.723) $) rectangle ++(1.06,-1.9);
+\draw[black] ($ (zykl_bottomright) + (0.09,1.9)-(0,1.723) + (0.53,0) - (0.05,0) $) rectangle ++(0.1,1.032);
+
+
+%Bunkertür
+\fill[draw=black,fill=gray!50!white] ($ (ZwischenraumBunker1) + (-1.4,-0.1cm) $) --++(0,-1)--++(45:-0.3)--++(3.35,0)--++(0,1.21)--cycle;
+\draw[<->, black, very thick] ($ (ZwischenraumBunker1) + (-1.4,-0.1cm) + (1.1,-.6) $) --++(1,0);
+
+%Hochstromraumtür
+\fill[draw=black,fill=gray!50!white] ($ (HochstromraumAusg2) + (0.16,0.1) $) rectangle ++ (-3.37,1.1);
+\draw[<->, black, very thick] ($ (HochstromraumAusg2) + (0.16,0.1) + (-1.1,.55) $) --++(-1,0);
+
+%Experimentierhallentür
+\fill[draw=black,fill=gray!50!white] ($ (ExpHalleTuer) + (-0.1,-0.1) $) --++(-3.3,0) --++(0,1.1)--++(3.2,0)--++(0,-0.59)--++(0.1,0)--cycle;
+\draw[<->, black, very thick] ($ (ExpHalleTuer) + (-2.15,0.55) + (0,-0.12) $) --++(1,0);
+
+%Zwischenbereichstür  NB: Dimensionen aller Strahlenschutztüren in der Breite angepasst
+\fill[draw=black,fill=gray!50!white] ($ (ExpHalleEingang1) + (1.30,-0.1) + (0,-0.09) + (0.06,0) + (0,-1.4)   + (-0.35,0) + (-0.1,0)$) --++(-3.05,0) --++(0,-1.35)--++($ (3.05,0) + (0.21,0) $)--++(0,0.55)--++(-0.21,0)-- cycle;
+\draw[<->, black, very thick] ($ (ExpHalleEingang1) + (1.30,-0.1) + (0,-0.09) + (0.06,0) + (0,-1.4)   + (-0.35,0) + (-0.1,0) + (-0.9,-.675) $) --++(-1,0);
+
+
+
+%Betonsteine in Experimentierhalle
+\coordinate (ExpHalleBlock1) at ($ (ExpHalleEingang1) + (1.30,-0.1) + (0.435,0) $);
+\draw[black,  rotate around={55:(ExpHalleBlock1)}] (ExpHalleBlock1) rectangle ++(2.0,-0.5);
+
+\coordinate (ExpHalleBlock2) at ($ (ExpHalleD1) + (0.5,0) $);
+\draw[black, rotate around={55:(ExpHalleBlock2)}] (ExpHalleBlock2) rectangle++ (1.5,0.25) coordinate (ExpHalleBlock2_p1);
+
+\coordinate (ExpHalleBlock3) at ($ (SpektrometerhalleU) + (-4.5,-2) + (0,0.8) $);
+\draw[black, rotate around={30:(ExpHalleBlock3)}] (ExpHalleBlock3) --++(0,-2.5) -- ++ (3,0) coordinate (block3test) -- ++(0,-0.5)--++(0.3,0)--++(0,-0.5) --++(-3.5,0) --++(0,-0.5)--++(-0.5,0)--++(0,1.5)--++(0.2,0) --++(0,2.5) -- cycle ; %Winkel (lt Messung 42°) aufgrund von optischen gründen angepasst
+
+%debug winkel Block 3
+%  \draw[red] (block3test)--++(0,2.242);
+
+%Block4
+\draw[ black] (ExphalleEckeD) rectangle ++(-3.9,0.5);
+
+%Block5 (falsch, korrektur nötig)
+\draw[ black] ($ (ExphalleEckeD) + (-0.4,2.05) $) --++ (0,-1) -- ++ (-0.25,0)--++(0,-0.25) --++(-.25,0)--++(0,1.25)--cycle;
+
+\coordinate (ExpHalleBlock6) at ($ (ExpHalleBlock2_p1) + (0.5,0.4) $);
+\draw [black, rotate around={32.5:(ExpHalleBlock6)}] (ExpHalleBlock6) rectangle ++(-0.5,-1.4);
+
+
+%ODL-Messsonden
+%\node[circle,inner sep=0, fill=cyan] at ($ (zykl_topright) + (1.8,2.3) $) {\textbf{\tiny{$\begin{matrix}\text{G1}\\ \text{N1}\end{matrix}$}}};
+%\node[circle,inner sep=0, fill=cyan] at ($ (Zwischenraumtest1) + (1.2,0) + (0,0.8) + (1,-0.3) $) {\textbf{\tiny{$\begin{matrix}\text{G2}\\ %\text{N2}\end{matrix}$}}};
+%\node[circle,inner sep=0, fill=cyan] at ($ (HochstromraumAusg1) + (-4.7,-1.6) $) {\textbf{\tiny{$\begin{matrix}\text{G3}\\ \text{N3}\end{matrix}$}}};
+%\node[circle,inner sep=2, fill=cyan] at ($ (SpektrometerhalleU) + (0,0.8) + (-1,-0.3) $) {\textbf{\tiny{N4}}};
+%\node[circle,inner sep=2, fill=cyan] at ($ (SpektrometerhalleU) + (0.3,-0.3) $) {\textbf{\tiny{G4}}};
+%\node[circle,inner sep=0, fill=cyan] at ($ (HSRvorraumAusgangB1) + (4.85,0.35) $) {\textbf{\tiny{$\begin{matrix}\text{G5}\\ \text{N5}\end{matrix}$}}};
+
+
+%Strahl-AUS-Taster
+\fill[red!50!orange] ($ (StrahlplatzC2) + (1.4,-1.4) $) circle[radius=0.2cm];%HSR
+\fill[red!50!orange] ($ (ExpHalleEingang1) + (-0.25,0.25) $) circle[radius=0.2cm];%AnTreppe
+\fill[red!50!orange] ($ (SpektrometerhalleU) + (0,0.8) + (-0.25,-0.25) $) circle[radius=0.2cm];%Experimentierhalle Mitte
+\fill[red!50!orange] ($ (SpektrometerhalleD) + (4.7,-0.6) $) circle[radius=0.2cm];%ExpHalle Splitpol
+\fill[red!50!orange] ($ (Zwischenraumtest1) + (0,-2.5) + (1,0.25) $) circle[radius=0.2cm];%Zwischenraum
+\fill[red!50!orange] ($ (bunker_amwinkel) + (-0.7,-0.7) + (-45:0.25) $) circle[radius=0.2cm];%Bunker am Winkel oben
+\fill[red!50!orange] ($ (zykl_topright) + (5,-2) + (-0.25,0) $) circle[radius=0.2cm];%Bunker am Nord-Dee
+\fill[red!50!orange] ($ (zykl_topleft) + (0,-1.1) + (0,-0.9) + (-0.7,0.25) $) circle[radius=0.2cm];%Unterm Zyklotron
+
+
+%Interlock-Taster
+\fill[green!80!blue] ($ (StrahlplatzC2) + (0.5,-1.4) $) circle[radius=0.2cm]; %HSR
+\fill[green!80!blue] ($ (HSRVorraumAusgB) + (1,-1) + (-0.25, -0.25) $) circle[radius=0.2cm];%Raum unter Treppe
+\fill[green!80!blue] ($ (SpektrometerhalleU) + (0,0.8) + (-1.5,-0.25) $) circle[radius=0.2cm];%Experimentierhalle Mitte
+\fill[green!80!blue] ($ (SpektrometerhalleD) + (4.25,-0.6) $) circle[radius=0.2cm];%ExpHalle Splitpol
+\fill[green!80!blue] ($ (Zwischenraumtest1) + (0,-2.5) + (0.4,0.25) $) circle[radius=0.2cm];%Zwischenraum
+\fill[green!80!blue] ($ (bunker_amwinkel) + (-0.4,-0.4) + (-45:0.25) $) circle[radius=0.2cm];%Bunker am Winkel oben
+\fill[green!80!blue] ($ (zykl_topright) + (5,-2.5) + (-0.25,0) $) circle[radius=0.2cm];%Bunker am Nord-Dee
+\fill[green!80!blue] ($ (zykl_topleft) + (0,-1.1) + (0,-0.9) + (-0.28,0.25) $) circle[radius=0.2cm];%Unterm Zyklotron
+
+
+\end{scope}
+
+%Legende
+\addlegendentry{RF Dee}{fill=green!70!black}
+\setlegendtext{source}{ECR Source}
+\setlegendtext{dipole}{Dipole}
+\setlegendtext{quadrupole}{Quadrupole}
+\setlegendtext{corrector}{Corrector}
+\setlegendtext{solenoid}{Solenoid}
+\setlegendtext{screen}{\textsc{Faraday} Cup}
+\setlegendtext{valve}{Apertur}
+\addlegendentry{Extraction}{draw=white}%,inner sep=3pt,  minimum width=0.2cm  scale=0.3
+\fill[black] (9.55,3.95) circle[radius=0.1cm];
+\addlegendentry{Beam-Off}{draw=white}
+\fill[red!50!orange] (9.55,3.11) circle[radius=0.2cm];
+\addlegendentry{Interlock}{draw=white}
+\fill[green!80!blue] (9.55,2.37) circle[radius=0.2cm];
+\addlegendentry{LDR Sensor}{draw=white}
+\fill[cyan] (9.55,1.63)circle[radius=0.2cm];
+\legend{(9.5,10)}[1.5]
+
+
+
+\node[anchor=south east] at (14.5,-5.37) {D. Sauerland, Mar. 2022};
+
+\end{lattice}
+\end{document}
