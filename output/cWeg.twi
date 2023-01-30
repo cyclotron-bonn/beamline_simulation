@@ -1,6 +1,6 @@
 SDDS1
 !# little-endian
-&description text="Twiss parameters--input: c_weg.ele  lattice: ../lteFiles/lattice_c_weg_optimize.lte", contents="Twiss parameters", &end
+&description text="Twiss parameters--input: c_weg_optimizeQ6C.ele  lattice: ../lteFiles/lattice_c_weg_optimize.lte", contents="Twiss parameters", &end
 &parameter name=Step, description="Simulation step", type=long, &end
 &parameter name=SVNVersion, description="SVN version number", type=string, fixed_value=28583M, &end
 &parameter name=nux, symbol="$gn$r$bx$n", units="1/(2$gp$r)", description="Horizontal tune", type=double, &end
