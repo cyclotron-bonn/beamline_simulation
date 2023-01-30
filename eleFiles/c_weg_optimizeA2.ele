@@ -14,10 +14,10 @@
 
 
 &run_setup
-	lattice="lattice_c_weg_optimize.lte"!"lattice_hinterberger.lte"
+	lattice="../lteFiles/lattice_c_weg_optimize.lte"
 	use_beamline="XA2" !change to use different "weg"
 
-    rootname = "simout/synchr"
+    rootname = "../output/cWeg"
 	default_order = 3
 	sigma="%s.s" !sigma output
 	final="%s.fin" !final beam parameter
