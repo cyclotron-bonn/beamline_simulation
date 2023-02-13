@@ -23,5 +23,3 @@ To run the simulation use "elegant file.ele".
 ## TODO
 * Instruction to install elegant and how to use simulation
 * better optimization function
-* Q5C to extraction point in sim
-* Measurement of Q4C to Q5C
