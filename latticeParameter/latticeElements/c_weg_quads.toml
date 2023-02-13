@@ -45,10 +45,12 @@ hA = 0.04025
 [Q7]
 elegantKey = "quad"
 l = 0.201 #geometric value no confidence
+hA = 0 #has to be measured
 
 [Q8]
 elegantKey = "quad"
 l = 0.201 #geometric value no confidence
+hA = 0 #has to be measured
 
 [A2]
 elegantKey = "sbend"
