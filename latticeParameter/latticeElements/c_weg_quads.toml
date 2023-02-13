@@ -4,14 +4,17 @@
 # hA halfe apperture
 
 [Q1]
+elegantKey = "quad"
 l  = 0.22525
 hA = 0.02525
 
 [Q2]
+elegantKey = "quad"
 l  = 0.22525
 hA = 0.02525
 
 [A0]
+elegantKey = "sbend"
 l=0.262
 angle=0.2096 #rad
 e1 = 0.0
@@ -20,28 +23,35 @@ h1=7.6
 h2=7.6
 
 [Q3]
+elegantKey = "quad"
 l=0.22525
 hA = 0.02525
 
 [Q4]
+elegantKey = "quad"
 l=0.24025
 hA = 0.04025
 
 [Q5]
+elegantKey = "quad"
 l=0.24025
 hA = 0.04025
 
 [Q6]
+elegantKey = "quad"
 l=0.24025
 hA = 0.04025
 
 [Q7]
+elegantKey = "quad"
 l = 0.201 #geometric value no confidence
 
 [Q8]
+elegantKey = "quad"
 l = 0.201 #geometric value no confidence
 
 [A2]
+elegantKey = "sbend"
 l=1.9634
 angle= 1.57079
 e2=0.8726646259972
@@ -50,30 +60,37 @@ h2 = 0.585
 h1 = 0
 
 [Q1C]
+elegantKey = "quad"
 l=0.24025
 hA = 0.04025
  
 [Q2C]
+elegantKey = "quad"
 l  = 0.22525
 hA = 0.02525
 
 [Q3C]
+elegantKey = "quad"
 l  = 0.22525
 hA = 0.02525
 
 [Q4C]
+elegantKey = "quad"
 l  = 0.22525
 hA = 0.02525
 
 [Q5C]
+elegantKey = "quad"
 l=0.24025
 hA = 0.04025
 
 [Q6C]
+elegantKey = "quad"
 l=0.24025
 hA = 0.04025
 
 [A4]
+elegantKey = "sbend"
 l=0.659
 angle= 0.26179
 e2=0
