@@ -112,7 +112,7 @@ def lineString(upperstring: str):
 
 
 
-def assembleLine(quads, bends, drifts, tags, clears = "all", xlim= 0.35, ylim= 0.35):
+def assembleLine(quads, bends, drifts, tags, clears = "all", xlim= 0.035, ylim= 0.035):
     string = ""
     for pos in range(len(drifts)):
         string = string + drifttoString(drifts[pos]) + "\n"
@@ -126,7 +126,6 @@ def assembleLine(quads, bends, drifts, tags, clears = "all", xlim= 0.35, ylim= 0
             if bend.position == pos:
                 string = string + bendtoString(bend) + "\n"
                 break
-
     string = string + lineString(string)
     return string
 
