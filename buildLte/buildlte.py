@@ -55,7 +55,7 @@ def readFileMagtoList(quadFile: str):
             quads.append(Quaddrupole(   element, "quad", 
                                         quadDict[element]["l"], 
                                         quadDict[element]["hA"], 
-                                        0 , # geometric strength maybe here maybe later
+                                        quadDict[element]["k1"] , # geometric strength maybe here maybe later
                                         k)) 
         elif quadDict[element]["elegantKey"] == "sbend":
             bends.append(BendingMagnet( element, "sbend", 
@@ -112,7 +112,7 @@ def lineString(upperstring: str):
 
 
 
-def assembleLine(quads, bends, drifts, tags, clears = "all", xlim= 0.3, ylim= 0.3):
+def assembleLine(quads, bends, drifts, tags, clears = "all", xlim= 0.35, ylim= 0.35):
     string = ""
     for pos in range(len(drifts)):
         string = string + drifttoString(drifts[pos]) + "\n"
