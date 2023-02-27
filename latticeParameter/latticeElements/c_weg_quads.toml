@@ -32,6 +32,15 @@ elegantKey = "quad"
 l=0.24025
 hA = 0.04025
 
+[A1] 
+elegantKey = "sbend"
+l=1.9634
+angle= 1.57079
+e1=0.8726646259972
+e2 = 0.02565634000432
+h1 = 0.585
+h2 = 0
+
 [Q5]
 elegantKey = "quad"
 l=0.24025
