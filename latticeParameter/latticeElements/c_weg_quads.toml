@@ -7,11 +7,13 @@
 elegantKey = "quad"
 l  = 0.22525
 hA = 0.02525
+k1 = -8.111316713341184e+00
 
 [Q2]
 elegantKey = "quad"
 l  = 0.22525
 hA = 0.02525
+k1= 7.441845116217431e+00
 
 [A0]
 elegantKey = "sbend"
@@ -26,11 +28,13 @@ h2=7.6
 elegantKey = "quad"
 l=0.22525
 hA = 0.02525
+k1 = 0
 
 [Q4]
 elegantKey = "quad"
 l=0.24025
 hA = 0.04025
+k1 = -4.938561622964420e-01
 
 [A1] 
 elegantKey = "sbend"
@@ -45,21 +49,25 @@ h2 = 0
 elegantKey = "quad"
 l=0.24025
 hA = 0.04025
+k1 = 0
 
 [Q6]
 elegantKey = "quad"
 l=0.24025
 hA = 0.04025
+k1= 9.999915601468636e+00
 
 [Q7]
 elegantKey = "quad"
 l = 0.201 #geometric value no confidence
 hA = 0 #has to be measured
+k1 = -1.511182415981476e+01
 
 [Q8]
 elegantKey = "quad"
 l = 0.201 #geometric value no confidence
 hA = 0 #has to be measured
+k1 = 1.864675663005335e+01
 
 [A2]
 elegantKey = "sbend"
@@ -74,31 +82,37 @@ h1 = 0
 elegantKey = "quad"
 l=0.24025
 hA = 0.04025
- 
+k1 = 1.507337974899172e+00
+
 [Q2C]
 elegantKey = "quad"
 l  = 0.22525
 hA = 0.02525
+k1 = 0
 
 [Q3C]
 elegantKey = "quad"
 l  = 0.22525
 hA = 0.02525
+k1 =  3.032009511989033e+00
 
 [Q4C]
 elegantKey = "quad"
 l  = 0.22525
 hA = 0.02525
+k1 = -4.071592647749759e+00
 
 [Q5C]
 elegantKey = "quad"
 l=0.24025
 hA = 0.04025
+k1 = -9.999994516123344e+00
 
 [Q6C]
 elegantKey = "quad"
 l=0.24025
 hA = 0.04025
+k1 = 5.310866645179173e+00
 
 [A4]
 elegantKey = "sbend"
