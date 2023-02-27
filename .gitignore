@@ -1,1 +1,12 @@
 latticeParameter/quadrupolesTest.py
+buildLte/c_weg.ele
+buildLte/test.lte
+output/cWeg.acc
+output/cWeg.bun
+output/cWeg.cen
+output/cWeg.fin
+output/cWeg.lost
+output/cWeg.mag
+output/cWeg.out
+output/cWeg.s
+output/cWeg.twi
