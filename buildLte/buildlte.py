@@ -1,4 +1,3 @@
-#TODO input toml files as command line argument
 #TODO dataclass TAG (for beta function) and clear
 #TODO quads geometric strength
 #TODO manual geometric strength variation 
@@ -44,6 +43,11 @@ class Drift:
 
 # read lattice parameters into list of quads and bends
 def readFileMagtoList(quadFile: str):
+    """
+    reads the quadPath file to a list of Quadrupole
+
+    quadFile: string of Path to file
+    """
     quadsFile = open(quadFile) #"../latticeParameter/latticeElements/c_weg_quads.toml" 
     quadDict = toml.load(quadsFile, _dict=dict)
 
@@ -70,6 +74,11 @@ def readFileMagtoList(quadFile: str):
     return quads, bends
 
 def readFileDrifttoList(driftFile):
+    """
+    reads the driftPath file to a list of Drift
+
+    driftFile: string of Path to file
+    """
     quadsFile = open(driftFile) 
     driftDict = toml.load(quadsFile, _dict=dict)
 
@@ -81,6 +90,7 @@ def readFileDrifttoList(driftFile):
 
 #-------------------------------------------------------------------------------
 
+#following functions assemble strings for lte file from objects
 def quadtoString(quad: Quaddrupole):
     string = f"{quad.identifier}: {quad.elegantKey}, l={quad.l}, k1={quad.k}"
     return string
@@ -113,6 +123,9 @@ def lineString(upperstring: str):
 
 
 def assembleLine(quads, bends, drifts, tags, clears = "all", xlim= 0.035, ylim= 0.035):
+    """
+    assembles the lte string
+    """
     string = ""
     for pos in range(len(drifts)):
         string = string + drifttoString(drifts[pos]) + "\n"
@@ -130,6 +143,9 @@ def assembleLine(quads, bends, drifts, tags, clears = "all", xlim= 0.035, ylim= 
     return string
 
 def writelteFile(filename, magfile, driftfile):
+    """
+    writes the lte string to lte file
+    """
     quads, bends = readFileMagtoList(magfile)
     drifts = readFileDrifttoList(driftfile)
     string = assembleLine(quads, bends, drifts, 0)
