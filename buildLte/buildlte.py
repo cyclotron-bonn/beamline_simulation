@@ -1,4 +1,4 @@
-#TODO dataclass TAG (for beta function) and clear
+#TODO dataclass TAG (for beta function)
 #TODO quads geometric strength
 #TODO manual geometric strength variation 
 #TODO documentation for functions
@@ -127,10 +127,11 @@ def assembleLine(quads, bends, drifts, tags, clears = "all", xlim= 0.035, ylim= 
     assembles the lte string
     """
     string = ""
+
+    string = string + f"apperture: maxamp, x_max={xlim}, y_max={ylim}, elliptical=1, exponent=2\n"
+
     for pos in range(len(drifts)):
         string = string + drifttoString(drifts[pos]) + "\n"
-        if clears == "all":
-            string = string + clearstr(drifts[pos].identifier,xlim, ylim) + "\n"
         for quad in quads:
             if quad.position == pos:
                 string = string + quadtoString(quad) + "\n"
