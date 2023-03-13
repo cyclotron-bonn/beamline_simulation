@@ -122,7 +122,7 @@ def lineString(upperstring: str):
 
 
 
-def assembleLine(quads, bends, drifts, tags, clears = "all", xlim= 0.035, ylim= 0.035):
+def assembleLine(quads, bends, drifts, tags, xlim= 0.035, ylim= 0.035):
     """
     assembles the lte string
     """
