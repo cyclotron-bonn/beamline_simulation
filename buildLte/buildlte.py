@@ -1,6 +1,5 @@
 #TODO input toml files as command line argument
 #TODO dataclass TAG (for beta function) and clear
-#TODO string assembly for classes
 #TODO quads geometric strength
 #TODO manual geometric strength variation 
 #TODO documentation for functions
@@ -10,6 +9,7 @@
 #read lte parameters
 import toml
 from dataclasses import dataclass
+import sys
 
 @dataclass
 class Quaddrupole:
@@ -136,7 +136,9 @@ def writelteFile(filename, magfile, driftfile):
     with open(filename, "w") as text_file:
         text_file.write(string)
 
+#-------------------------------------------------------------------------------
 
+ltePath, quadPath, driftPath =  sys.argv[1:4]
 
-
-writelteFile("test.lte", "../latticeParameter/latticeElements/c_weg_quads.toml", "../latticeParameter/drifts/c_weg_drifts.toml")
+if __name__ == "__main__":
+    writelteFile(ltePath, quadPath, driftPath)
