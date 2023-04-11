@@ -1,0 +1,39 @@
+apperture: maxamp, x_max=0.035, y_max=0.035, elliptical=1, exponent=2
+xQ1: drift, l=1
+Q1: quad, l=0.22525, k1=-8.111316713341184
+Q1Q2: drift, l=0.15
+Q2: quad, l=0.22525, k1=7.441845116217431
+Q2A0: drift, l=0.28
+A0: sbend, l=0.262, angle=0.2096, e1=0.0, e2=0.0, h1=7.6, h2=7.6
+A0Q3: drift, l=0.36
+Q3: quad, l=0.22525, k1=0
+Q3Q4: drift, l=0.6845
+Q4: quad, l=0.24025, k1=-0.493856162296442
+Q4A1: drift, l=0.35
+A1: sbend, l=1.9634, angle=1.57079, e1=0.8726646259972, e2=0.02565634000432, h1=0.585, h2=0
+A1Q5: drift, l=1.66
+Q5: quad, l=0.24025, k1=0
+Q5Q6: drift, l=0.9
+Q6: quad, l=0.24025, k1=9.999915601468636
+Q6Q7: drift, l=0.247
+Q7: quad, l=0.201, k1=-15.11182415981476
+Q7Q8: drift, l=0.248
+Q8: quad, l=0.201, k1=18.64675663005335
+Q8A2: drift, l=0.763
+A2: sbend, l=1.9634, angle=1.57079, e1=0.02565634000432, e2=0.8726646259972, h1=0, h2=0.585
+A2Q1C: drift, l=0.45
+Q1C: quad, l=0.24025, k1=1.507337974899172
+Q1CQ2C: drift, l=0.6845
+Q2C: quad, l=0.22525, k1=0
+Q2CQ3C: drift, l=0.74775
+Q3C: quad, l=0.22525, k1=3.032009511989033
+Q3CQ4C: drift, l=0.14575
+Q4C: quad, l=0.22525, k1=-4.071592647749759
+Q4CQ5C: drift, l=6.14175
+Q5C: quad, l=0.24025, k1=-9.999994516123344
+Q5CQ6C: drift, l=0.21075
+Q6C: quad, l=0.24025, k1=5.310866645179173
+Q6A4: drift, l=2.154508
+A4: sbend, l=0.659, angle=0.26179, e1=0, e2=0, h1=0.110524, h2=0.110524
+A415EXIT: drift, l=0.565
+path: LINE=(apperture, xQ1, Q1, Q1Q2, Q2, Q2A0, A0, A0Q3, Q3, Q3Q4, Q4, Q4A1, A1, A1Q5, Q5, Q5Q6, Q6, Q6Q7, Q7, Q7Q8, Q8, Q8A2, A2, A2Q1C, Q1C, Q1CQ2C, Q2C, Q2CQ3C, Q3C, Q3CQ4C, Q4C, Q4CQ5C, Q5C, Q5CQ6C, Q6C, Q6A4, A4, A415EXIT)

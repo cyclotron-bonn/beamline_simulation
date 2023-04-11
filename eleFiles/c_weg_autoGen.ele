@@ -1,0 +1,67 @@
+! use protons instead of electrons
+&change_particle  
+    name = "proton"  
+    !mass_ratio = 0 ! specify custom masses (helpfull for deuterium, alpha?)
+    !charge_ratio = 1  ! will stay probably
+&end 
+
+! &aperture_data
+!     input = "apertur.in"
+!     periodic = 1;
+!     persistent = 0;
+!     disable = 0;
+! &end
+
+
+&run_setup
+	lattice="../lteFiles/c_weg_autoGen.lte"!
+	use_beamline="path" !change to use different "weg"
+
+    rootname = "../output/cWeg"
+	default_order = 3
+	sigma="%s.s" !sigma output
+	final="%s.fin" !final beam parameter
+	output="%s.out" !phase space coords
+	magnets="%s.mag" !magnet representation
+	centroid="%s.cen" !beam centroids (center of mass?)
+    acceptance="%s.acc" !not lost particles
+    losses="%s.lost"! lost particles
+
+    p_central =  0.1733918406003467 ! 14MeV
+&end
+
+&run_control 
+    n_steps=1 !how many times is simulated
+&end
+
+&twiss_output
+    filename= "%s.twi",
+    final_values_only=0,
+    statistics=1,
+    radiation_integrals=0,
+    concat_order = 3,
+    local_dispersion = 0,
+    matched = 0
+    beta_x = 3.5072815534,  alpha_x = -0.5786451401438165
+    beta_y = 5.90909,       alpha_y = -4.150194598599981
+&end    
+
+
+
+&bunched_beam 
+	bunch = "%s.bun" ! file where phase space coords of bunches are written
+    n_particles_per_bunch = 10000
+    sigma_dp = 4e-3, ! energy spread have to convert!fractional momentum spread
+    sigma_s = 0.7108510458495747
+    beta_x = 3.5072815534,  alpha_x = -0.5786451401438165 
+    beta_y = 5.90909,       alpha_y = -4.150194598599981
+    emit_x = 5.1499611649021206e-06
+    emit_y = 7.156290938747533e-06
+    enforce_rms_values[0] = 3*1,
+&end
+
+
+
+&track
+    soft_failure = 1
+&end
